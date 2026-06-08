@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Reveal from "@/components/Reveal";
 
 type ProductStatus = "Owned" | "Recommended" | "Wishlist";
 
@@ -17,6 +18,7 @@ type Product = {
   youtubeUrl?: string;
   featured?: boolean;
   dateAdded: string;
+  room: string;
 };
 
 const categories = [
@@ -48,6 +50,7 @@ const products: Product[] = [
     affiliateUrl: "#",
     featured: true,
     dateAdded: "2026-06-08",
+    room: "Command Desk",
   },
   {
     id: 2,
@@ -64,6 +67,7 @@ const products: Product[] = [
     youtubeUrl: "https://www.youtube.com/@marvel.marodza",
     featured: true,
     dateAdded: "2026-06-08",
+    room: "Editing Bay",
   },
   {
     id: 3,
@@ -78,6 +82,7 @@ const products: Product[] = [
     imageEmoji: "🎙️",
     affiliateUrl: "#",
     dateAdded: "2026-06-08",
+    room: "Audio Rack",
   },
   {
     id: 4,
@@ -93,6 +98,7 @@ const products: Product[] = [
     affiliateUrl: "#",
     featured: true,
     dateAdded: "2026-06-08",
+    room: "Camera Shelf",
   },
   {
     id: 5,
@@ -107,6 +113,7 @@ const products: Product[] = [
     imageEmoji: "🤖",
     affiliateUrl: "#",
     dateAdded: "2026-06-08",
+    room: "AI Console",
   },
   {
     id: 6,
@@ -121,6 +128,7 @@ const products: Product[] = [
     imageEmoji: "🎒",
     affiliateUrl: "#",
     dateAdded: "2026-06-08",
+    room: "Travel Locker",
   },
   {
     id: 7,
@@ -135,6 +143,7 @@ const products: Product[] = [
     imageEmoji: "📁",
     affiliateUrl: "#",
     dateAdded: "2026-06-08",
+    room: "Germany Drawer",
   },
   {
     id: 8,
@@ -149,6 +158,7 @@ const products: Product[] = [
     imageEmoji: "🔧",
     affiliateUrl: "#",
     dateAdded: "2026-06-08",
+    room: "Workshop Bench",
   },
 ];
 
@@ -175,10 +185,13 @@ export default function ToolboxSection() {
         product.category === selectedCategory ||
         (selectedCategory === "Wishlist" && product.status === "Wishlist");
 
+      const searchValue = search.toLowerCase();
+
       const matchesSearch =
-        product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.category.toLowerCase().includes(search.toLowerCase()) ||
-        product.review.toLowerCase().includes(search.toLowerCase());
+        product.name.toLowerCase().includes(searchValue) ||
+        product.category.toLowerCase().includes(searchValue) ||
+        product.review.toLowerCase().includes(searchValue) ||
+        product.room.toLowerCase().includes(searchValue);
 
       return matchesCategory && matchesSearch;
     });
@@ -214,189 +227,217 @@ export default function ToolboxSection() {
   return (
     <section
       id="toolbox"
-      className="relative z-10 scroll-mt-24 bg-gradient-to-b from-slate-950 via-black to-slate-950 px-6 py-28 text-white light:from-orange-50 light:via-white light:to-blue-50 light:text-black"
+      className="relative z-10 scroll-mt-24 overflow-hidden bg-gradient-to-b from-slate-950 via-black to-slate-950 px-6 py-28 text-white light:from-orange-50 light:via-white light:to-blue-50 light:text-black"
     >
-      <div className="mx-auto max-w-7xl">
-        <div className="max-w-4xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-orange-300 light:text-orange-600">
-            Marvel&apos;s Toolbox
-          </p>
+      <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="absolute bottom-24 right-10 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl" />
 
-          <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
-            The tools, gear and resources behind the journey.
-          </h2>
+      <div className="relative mx-auto max-w-7xl">
+        <Reveal direction="up">
+          <div className="max-w-4xl">
+            <p className="text-sm uppercase tracking-[0.35em] text-orange-300 light:text-orange-600">
+              Marvel&apos;s Toolbox
+            </p>
 
-          <p className="mt-6 text-lg leading-8 text-gray-400 light:text-gray-600">
-            A personal collection of products, software, equipment, books and
-            resources I use, recommend, own or plan to buy. This is not a random
-            store — it is a transparent creator toolbox built from my real
-            journey.
-          </p>
-        </div>
+            <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
+              My creator inventory room.
+            </h2>
 
-        {/* Affiliate disclosure */}
-        <div className="mt-10 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-6 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
-          <strong>Affiliate disclosure:</strong> Some links on this page may be
-          affiliate links. If you purchase through these links, I may earn a
-          small commission at no extra cost to you. I only recommend products
-          and services that I personally use, trust, or believe provide genuine
-          value.
+            <p className="mt-6 text-lg leading-8 text-gray-400 light:text-gray-600">
+              Products, software, equipment, books and resources I use,
+              recommend, own or plan to buy. This section is built for future
+              affiliate marketing, but it stays personal, honest and rooted in
+              the real journey.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <div className="mt-10 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-6 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
+            <strong>Affiliate disclosure:</strong> Some links on this page may
+            be affiliate links. If you purchase through these links, I may earn
+            a small commission at no extra cost to you. I only recommend
+            products and services that I personally use, trust, or believe
+            provide genuine value.
+          </div>
+        </Reveal>
+
+        {/* Inventory rooms */}
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Command Desk", "PC, monitors, workflow and workspace.", "🖥️"],
+            ["Editing Bay", "Video, sound, color and storytelling.", "🎬"],
+            ["Travel Locker", "Gear for movement, airports and daily life.", "🎒"],
+            ["Workshop Bench", "Kfz, technical learning and tools.", "🔧"],
+          ].map(([title, text, icon], index) => (
+            <Reveal key={title} delay={index * 0.06} direction="scale">
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm">
+                <p className="text-4xl">{icon}</p>
+                <h3 className="mt-5 text-xl font-bold">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                  {text}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         {/* Featured products */}
         <div className="mt-16">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="text-sm uppercase tracking-[0.25em] text-blue-300 light:text-blue-600">
-                Featured Products
-              </p>
-              <h3 className="mt-3 text-3xl font-bold">
-                My current highlights
-              </h3>
-            </div>
-          </div>
+          <Reveal>
+            <p className="text-sm uppercase tracking-[0.25em] text-blue-300 light:text-blue-600">
+              Featured Products
+            </p>
+            <h3 className="mt-3 text-3xl font-bold">Current highlights</h3>
+          </Reveal>
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {featuredProducts.map((product) => (
-              <button
-                key={product.id}
-                onClick={() => setSelectedProduct(product)}
-                className="rounded-3xl border border-white/10 bg-white/[0.05] p-6 text-left backdrop-blur-md transition hover:-translate-y-1 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
-              >
-                <div className="flex h-36 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl">
-                  {product.imageEmoji}
-                </div>
+            {featuredProducts.map((product, index) => (
+              <Reveal key={product.id} delay={index * 0.08} direction="scale">
+                <button
+                  onClick={() => setSelectedProduct(product)}
+                  className="group h-full w-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
+                >
+                  <div className="flex h-36 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.03]">
+                    {product.imageEmoji}
+                  </div>
 
-                <div className="mt-5 flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300 light:bg-gray-100 light:text-gray-700">
-                    {product.category}
-                  </span>
+                  <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300 light:bg-gray-100 light:text-gray-700">
+                      {product.room}
+                    </span>
 
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle(
-                      product.status
-                    )}`}
-                  >
-                    {product.status}
-                  </span>
-                </div>
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle(
+                        product.status
+                      )}`}
+                    >
+                      {product.status}
+                    </span>
+                  </div>
 
-                <h4 className="mt-5 text-2xl font-bold">{product.name}</h4>
+                  <h4 className="mt-5 text-2xl font-bold">{product.name}</h4>
 
-                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
-                  {product.review}
-                </p>
+                  <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                    {product.review}
+                  </p>
 
-                <p className="mt-4 text-orange-300 light:text-orange-600">
-                  {stars(product.rating)}
-                </p>
-              </button>
+                  <p className="mt-4 text-orange-300 light:text-orange-600">
+                    {stars(product.rating)}
+                  </p>
+                </button>
+              </Reveal>
             ))}
           </div>
         </div>
 
         {/* Filters */}
-        <div className="mt-16 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white light:shadow-sm">
-          <div className="grid gap-4 lg:grid-cols-[1fr_240px]">
-            <input
-              type="text"
-              placeholder="Search tools, software, gear..."
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition placeholder:text-gray-500 focus:border-orange-300 light:border-gray-200 light:bg-white light:text-black"
-            />
+        <Reveal>
+          <div className="mt-16 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white light:shadow-sm">
+            <div className="grid gap-4 lg:grid-cols-[1fr_240px]">
+              <input
+                type="text"
+                placeholder="Search tools, software, rooms, gear..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition placeholder:text-gray-500 focus:border-orange-300 light:border-gray-200 light:bg-white light:text-black"
+              />
 
-            <select
-              value={sort}
-              onChange={(event) => setSort(event.target.value)}
-              className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition focus:border-orange-300 light:border-gray-200 light:bg-white light:text-black"
-            >
-              <option value="newest">Sort: Newest</option>
-              <option value="highest-rated">Sort: Highest Rated</option>
-              <option value="owned">Sort: Owned First</option>
-              <option value="recommended">Sort: Recommended First</option>
-            </select>
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`rounded-full px-4 py-2 text-sm transition ${
-                  selectedCategory === category
-                    ? "bg-orange-500 text-white"
-                    : "bg-white/10 text-gray-300 hover:bg-white/15 light:bg-gray-100 light:text-gray-700 light:hover:bg-blue-50"
-                }`}
+              <select
+                value={sort}
+                onChange={(event) => setSort(event.target.value)}
+                className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition focus:border-orange-300 light:border-gray-200 light:bg-white light:text-black"
               >
-                {category}
-              </button>
-            ))}
+                <option value="newest">Sort: Newest</option>
+                <option value="highest-rated">Sort: Highest Rated</option>
+                <option value="owned">Sort: Owned First</option>
+                <option value="recommended">Sort: Recommended First</option>
+              </select>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`rounded-full px-4 py-2 text-sm transition ${
+                    selectedCategory === category
+                      ? "bg-orange-500 text-white"
+                      : "bg-white/10 text-gray-300 hover:bg-white/15 light:bg-gray-100 light:text-gray-700 light:hover:bg-blue-50"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Product grid */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-1 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-orange-50"
-            >
-              <button
-                onClick={() => setSelectedProduct(product)}
-                className="w-full text-left"
-              >
-                <div className="flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl">
-                  {product.imageEmoji}
-                </div>
-
-                <div className="mt-5 flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300 light:bg-gray-100 light:text-gray-700">
-                    {product.category}
-                  </span>
-
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle(
-                      product.status
-                    )}`}
-                  >
-                    {product.status}
-                  </span>
-                </div>
-
-                <h3 className="mt-5 text-2xl font-bold">{product.name}</h3>
-
-                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
-                  {product.review}
-                </p>
-
-                <p className="mt-4 text-orange-300 light:text-orange-600">
-                  {stars(product.rating)}
-                </p>
-              </button>
-
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={product.affiliateUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 rounded-2xl bg-white px-5 py-3 text-center font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
+          {filteredProducts.map((product, index) => (
+            <Reveal key={product.id} delay={(index % 6) * 0.04} direction="scale">
+              <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-orange-50">
+                <button
+                  onClick={() => setSelectedProduct(product)}
+                  className="w-full text-left"
                 >
-                  Check Current Price
-                </a>
+                  <div className="flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.02]">
+                    {product.imageEmoji}
+                  </div>
 
-                {product.youtubeUrl && (
+                  <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300 light:bg-gray-100 light:text-gray-700">
+                      {product.category}
+                    </span>
+
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle(
+                        product.status
+                      )}`}
+                    >
+                      {product.status}
+                    </span>
+                  </div>
+
+                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-blue-300 light:text-blue-600">
+                    {product.room}
+                  </p>
+
+                  <h3 className="mt-3 text-2xl font-bold">{product.name}</h3>
+
+                  <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                    {product.review}
+                  </p>
+
+                  <p className="mt-4 text-orange-300 light:text-orange-600">
+                    {stars(product.rating)}
+                  </p>
+                </button>
+
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <a
-                    href={product.youtubeUrl}
+                    href={product.affiliateUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 rounded-2xl border border-white/10 px-5 py-3 text-center font-semibold text-white transition hover:bg-white/10 light:border-black/10 light:text-black light:hover:bg-blue-50"
+                    className="flex-1 rounded-2xl bg-white px-5 py-3 text-center font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
                   >
-                    Watch Review
+                    Check Price
                   </a>
-                )}
+
+                  {product.youtubeUrl && (
+                    <a
+                      href={product.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 rounded-2xl border border-white/10 px-5 py-3 text-center font-semibold text-white transition hover:bg-white/10 light:border-black/10 light:text-black light:hover:bg-blue-50"
+                    >
+                      Review
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
@@ -418,49 +459,50 @@ export default function ToolboxSection() {
               "The software, AI tools and creative systems I use to build Marvel’s Space and WildTwist Studios.",
               "🧰",
             ],
-          ].map(([title, text, icon]) => (
-            <div
-              key={title}
-              className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white light:shadow-sm"
-            >
-              <p className="text-4xl">{icon}</p>
-              <h3 className="mt-5 text-2xl font-bold">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
-                {text}
-              </p>
-            </div>
+          ].map(([title, text, icon], index) => (
+            <Reveal key={title} delay={index * 0.08} direction="up">
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 light:border-black/10 light:bg-white light:shadow-sm">
+                <p className="text-4xl">{icon}</p>
+                <h3 className="mt-5 text-2xl font-bold">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                  {text}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Newsletter CTA */}
-        <div className="mt-16 rounded-3xl bg-gradient-to-r from-blue-600 to-orange-500 p-8 text-white md:p-10">
-          <div className="grid gap-6 md:grid-cols-[1fr_360px] md:items-center">
-            <div>
-              <h3 className="text-3xl font-bold">
-                Get future toolbox updates.
-              </h3>
-              <p className="mt-3 text-white/80">
-                Join The Garden for future gear notes, AI tools, creative
-                resources and real recommendations from the journey.
-              </p>
+        <Reveal>
+          <div className="mt-16 rounded-3xl bg-gradient-to-r from-blue-600 to-orange-500 p-8 text-white md:p-10">
+            <div className="grid gap-6 md:grid-cols-[1fr_360px] md:items-center">
+              <div>
+                <h3 className="text-3xl font-bold">
+                  Get future toolbox updates.
+                </h3>
+                <p className="mt-3 text-white/80">
+                  Join The Garden for future gear notes, AI tools, creative
+                  resources and real recommendations from the journey.
+                </p>
+              </div>
+
+              <form className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="min-w-0 flex-1 rounded-2xl border border-white/20 bg-white/15 px-5 py-4 text-white outline-none placeholder:text-white/70"
+                />
+
+                <button
+                  type="button"
+                  className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105"
+                >
+                  Join
+                </button>
+              </form>
             </div>
-
-            <form className="flex flex-col gap-3 sm:flex-row">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="min-w-0 flex-1 rounded-2xl border border-white/20 bg-white/15 px-5 py-4 text-white outline-none placeholder:text-white/70"
-              />
-
-              <button
-                type="button"
-                className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105"
-              >
-                Join
-              </button>
-            </form>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       {/* Product detail modal */}
@@ -470,7 +512,7 @@ export default function ToolboxSection() {
             <div className="flex items-start justify-between gap-6">
               <div>
                 <p className="text-sm text-orange-300 light:text-orange-600">
-                  {selectedProduct.category}
+                  {selectedProduct.room}
                 </p>
                 <h3 className="mt-2 text-3xl font-bold">
                   {selectedProduct.name}
@@ -500,6 +542,10 @@ export default function ToolboxSection() {
 
               <span className="rounded-full bg-white/10 px-3 py-1 text-xs light:bg-gray-100">
                 {stars(selectedProduct.rating)}
+              </span>
+
+              <span className="rounded-full bg-white/10 px-3 py-1 text-xs light:bg-gray-100">
+                {selectedProduct.category}
               </span>
             </div>
 
