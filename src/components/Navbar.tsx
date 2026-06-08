@@ -7,7 +7,7 @@ const navLinks = [
   { name: "Journey", href: "#journey" },
   { name: "Germany Life", href: "#germany-life" },
   { name: "Travel", href: "#travel" },
-  { name: "Missions", href: "#missions" },
+  { name: "Creative", href: "#creative-worlds" },
   { name: "Toolbox", href: "#toolbox" },
   { name: "Videos", href: "#videos" },
   { name: "Contact", href: "#contact" },

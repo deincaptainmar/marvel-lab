@@ -5,83 +5,112 @@ import ToolboxSection from "@/components/ToolboxSection";
 const journeyCards = [
   {
     title: "Zimbabwe",
-    text: "Roots, faith, family, early dreams and entrepreneurship.",
+    flag: "🇿🇼",
+    text: "Roots, faith, family, early dreams and the place where the story began.",
   },
   {
     title: "Turkey",
-    text: "Aviation studies, growth, culture and discipline.",
+    flag: "🇹🇷",
+    text: "A chapter of aviation studies, culture, discipline and becoming more aware of the world.",
   },
   {
     title: "Germany",
-    text: "Ausbildung, language, work life and becoming stronger.",
+    flag: "🇩🇪",
+    text: "Growth, language, work discipline, systems and learning to rebuild life step by step.",
   },
   {
-    title: "Future",
-    text: "Aviation, media, AI, business and global impact.",
+    title: "United Kingdom",
+    flag: "🇬🇧",
+    text: "Travel memories, family moments and questions people ask about moving across borders.",
+  },
+  {
+    title: "Netherlands",
+    flag: "🇳🇱",
+    text: "Short trips, European movement and quiet observations from crossing into new places.",
+  },
+  {
+    title: "Ethiopia",
+    flag: "🇪🇹",
+    text: "Airport routes, layovers, African movement and reflections from the journey.",
+  },
+  {
+    title: "South Africa",
+    flag: "🇿🇦",
+    text: "Southern African connections, movement, culture and stories still being shaped.",
+  },
+  {
+    title: "More to Come",
+    flag: "🌍",
+    text: "The map is not complete. More countries, more stories and more lessons are still ahead.",
   },
 ];
 
 const germanyLifeCards = [
-  "Ausbildung",
-  "German Language",
-  "Work Culture",
-  "Documents & Systems",
-  "Faith Abroad",
-  "Daily Life",
-];
-
-const travelCards = [
   {
-    country: "🇩🇪 Germany",
-    text: "Ausbildung, systems, language, work culture and starting again.",
+    title: "Starting Again",
+    text: "The honest reality of rebuilding life in a new country.",
+    icon: "🌱",
   },
   {
-    country: "🇬🇧 United Kingdom",
-    text: "Travel stories, visa questions, family moments and lessons from the UK.",
+    title: "Language Growth",
+    text: "Learning German through daily life, mistakes and small wins.",
+    icon: "🗣️",
   },
   {
-    country: "🇹🇷 Turkey",
-    text: "Aviation studies, culture, growth and a chapter that shaped the journey.",
+    title: "Work Culture",
+    text: "Discipline, systems, responsibility and lessons from the environment.",
+    icon: "⏱️",
   },
   {
-    country: "🇳🇱 Netherlands",
-    text: "Short trips, European movement and observations across borders.",
-  },
-  {
-    country: "🇪🇹 Ethiopia",
-    text: "Airport routes, layovers, African aviation and travel memories.",
-  },
-  {
-    country: "🇿🇦 South Africa",
-    text: "Southern African movement, culture and future travel reflections.",
+    title: "Faith Abroad",
+    text: "Walking with God while far from home and becoming stronger inside.",
+    icon: "✝️",
   },
 ];
 
-const missionCards = [
+const creativeWorlds = [
   {
     title: "Marvel’s Space",
-    text: "The main personal brand and storytelling platform.",
+    text: "The main room for personal storytelling, faith, travel, creativity and growth.",
+    icon: "🌌",
   },
   {
     title: "WildTwist Studios",
-    text: "Animated stories, fun characters and creative experiments.",
+    text: "Animated stories, playful characters and creative experiments.",
+    icon: "🐒",
   },
   {
-    title: "AI Aviation News",
-    text: "A future content hub connecting AI and aviation.",
+    title: "Faith & Growth",
+    text: "Reflections, lessons and honest thoughts from the journey.",
+    icon: "🌿",
   },
   {
-    title: "Bible Comic Project",
-    text: "Faith stories told visually for modern audiences.",
+    title: "Travel Notes",
+    text: "Countries, movement, airport stories and cultural observations.",
+    icon: "🧭",
   },
   {
-    title: "Automation Projects",
-    text: "Tools, workflows and AI systems I am learning to build.",
+    title: "Media Experiments",
+    text: "Video ideas, editing practice, storytelling tests and visual direction.",
+    icon: "🎬",
   },
   {
-    title: "Future Logistics Vision",
-    text: "Ideas around transport, logistics and African development.",
+    title: "Learning Journal",
+    text: "Things I am discovering while building, creating and improving.",
+    icon: "📓",
   },
+];
+
+const mazeRooms = [
+  "Home",
+  "Welcome",
+  "Journey",
+  "Germany",
+  "Travel",
+  "Creative",
+  "Resources",
+  "Videos",
+  "Contact",
 ];
 
 export default function Home() {
@@ -90,58 +119,59 @@ export default function Home() {
       id="home"
       className="relative min-h-screen overflow-hidden bg-black text-white light:bg-white light:text-black"
     >
-      {/* HERO BACKGROUND */}
-      <div className="absolute inset-0 bg-black light:bg-white" />
+      {/* GLOBAL BACKGROUND */}
+      <div className="fixed inset-0 -z-10 bg-black light:bg-white" />
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.18),transparent_28%),radial-gradient(circle_at_80%_30%,rgba(249,115,22,0.16),transparent_30%),radial-gradient(circle_at_50%_90%,rgba(255,255,255,0.05),transparent_35%)] light:bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.14),transparent_28%),radial-gradient(circle_at_80%_30%,rgba(249,115,22,0.12),transparent_30%),radial-gradient(circle_at_50%_90%,rgba(0,0,0,0.04),transparent_35%)]" />
+      <div className="fixed inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:72px_72px] light:opacity-[0.09] light:[background-image:linear-gradient(rgba(0,0,0,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.14)_1px,transparent_1px)]" />
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_75%_45%,rgba(249,115,22,0.20),transparent_30%),radial-gradient(circle_at_bottom,rgba(255,255,255,0.05),transparent_35%)] light:bg-[radial-gradient(circle_at_25%_35%,rgba(59,130,246,0.16),transparent_30%),radial-gradient(circle_at_75%_45%,rgba(249,115,22,0.14),transparent_30%),radial-gradient(circle_at_bottom,rgba(0,0,0,0.04),transparent_35%)]" />
+      {/* FLOATING MAZE PATH */}
+      <div className="pointer-events-none fixed left-5 top-1/2 z-30 hidden -translate-y-1/2 xl:block">
+        <div className="relative rounded-full border border-white/10 bg-black/35 px-3 py-4 shadow-2xl backdrop-blur-xl light:border-black/10 light:bg-white/60">
+          <div className="absolute left-[21px] top-8 h-[calc(100%-64px)] w-px bg-gradient-to-b from-blue-400/20 via-orange-300/30 to-blue-400/20" />
 
-      <div className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:64px_64px] light:opacity-[0.1] light:[background-image:linear-gradient(rgba(0,0,0,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.12)_1px,transparent_1px)]" />
+          <div className="flex flex-col gap-4">
+            {mazeRooms.map((room, index) => {
+              const href =
+                room === "Germany"
+                  ? "#germany-life"
+                  : room === "Creative"
+                    ? "#creative-worlds"
+                    : room === "Resources"
+                      ? "#toolbox"
+                      : `#${room.toLowerCase()}`;
 
-      {/* SOFT MAZE / JOURNEY PATH */}
-      <div className="pointer-events-none fixed left-6 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-3 xl:flex">
-        {["Home", "Journey", "Travel", "Toolbox", "Contact"].map((item) => (
-          <div key={item} className="group flex items-center gap-3">
-            <div className="h-2.5 w-2.5 rounded-full bg-white/30 ring-4 ring-white/5 transition group-hover:bg-orange-300 light:bg-black/30 light:ring-black/5" />
-            <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 opacity-0 transition group-hover:opacity-100 light:text-black/40">
-              {item}
-            </span>
+              return (
+                <a
+                  key={room}
+                  href={href}
+                  className="pointer-events-auto group relative flex items-center gap-3"
+                >
+                  <span className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full border border-white/20 bg-black shadow-[0_0_20px_rgba(59,130,246,0.18)] transition group-hover:border-orange-300 group-hover:bg-orange-400 light:border-black/20 light:bg-white">
+                    <span className="h-1.5 w-1.5 rounded-full bg-white/50 transition group-hover:bg-black light:bg-black/50" />
+                  </span>
+
+                  <span className="translate-x-1 rounded-full border border-white/10 bg-black/80 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/50 opacity-0 shadow-lg transition group-hover:translate-x-0 group-hover:text-white group-hover:opacity-100 light:border-black/10 light:bg-white light:text-black/60 light:group-hover:text-black">
+                    {index + 1}. {room}
+                  </span>
+                </a>
+              );
+            })}
           </div>
-        ))}
+        </div>
       </div>
 
-      {/* FUTURISTIC SIDE PANELS */}
-      <div className="absolute left-6 top-1/2 hidden aspect-[9/16] w-[170px] -translate-y-1/2 rounded-[32px] border border-blue-400/20 bg-white/[0.03] backdrop-blur-md light:bg-black/[0.03] xl:block">
-        <div className="absolute inset-3 rounded-[26px] border border-white/10 light:border-black/10" />
-        <div className="absolute left-1/2 top-12 h-20 w-20 -translate-x-1/2 rounded-full border border-blue-300/20" />
-        <div className="absolute left-1/2 bottom-16 h-24 w-24 -translate-x-1/2 rotate-45 border border-orange-300/20" />
-      </div>
-
-      <div className="absolute right-6 top-1/2 hidden aspect-[9/16] w-[170px] -translate-y-1/2 rounded-[32px] border border-orange-400/20 bg-white/[0.03] backdrop-blur-md light:bg-black/[0.03] xl:block">
-        <div className="absolute inset-3 rounded-[26px] border border-white/10 light:border-black/10" />
-        <div className="absolute right-8 top-14 h-20 w-20 rounded-3xl border border-orange-300/20" />
-        <div className="absolute bottom-16 left-1/2 h-24 w-24 -translate-x-1/2 rounded-full border border-blue-300/20" />
-      </div>
-
-      {/* TRANSPORT ICONS */}
+      {/* HERO DECOR */}
       <div className="absolute left-[12%] top-[22%] hidden rotate-[-10deg] rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-3xl backdrop-blur-md light:border-black/10 light:bg-white/70 md:block">
         ✈️
       </div>
 
-      <div className="absolute left-[14%] bottom-[20%] hidden rotate-[8deg] rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-3xl backdrop-blur-md light:border-black/10 light:bg-white/70 md:block">
-        🚆
-      </div>
-
       <div className="absolute right-[13%] top-[24%] hidden rotate-[10deg] rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-3xl backdrop-blur-md light:border-black/10 light:bg-white/70 md:block">
-        🚗
-      </div>
-
-      <div className="absolute right-[16%] bottom-[18%] hidden rotate-[-8deg] rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-3xl backdrop-blur-md light:border-black/10 light:bg-white/70 md:block">
-        🚢
+        🎬
       </div>
 
       {/* HERO SECTION */}
       <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl scroll-mt-24 flex-col items-center justify-center gap-12 px-6 py-28 lg:flex-row lg:gap-16">
-        <Reveal className="max-w-3xl text-center lg:text-left">
+        <Reveal direction="right" className="max-w-3xl text-center lg:text-left">
           <p className="mb-6 text-xs uppercase tracking-[0.45em] text-blue-200/80 light:text-blue-700 md:text-sm">
             Welcome To
           </p>
@@ -155,16 +185,16 @@ export default function Home() {
           </p>
 
           <p className="mt-6 text-sm text-gray-400 light:text-gray-600 md:text-lg">
-            Faith • Travel • Germany Life • Creativity • AI • Aviation •
-            Entrepreneurship
+            Faith • Travel • Germany Life • Creativity • Media • Aviation •
+            Growth
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
             <a
-              href="#journey"
+              href="#welcome"
               className="rounded-2xl bg-white px-8 py-4 text-center font-semibold text-black transition hover:scale-105 hover:bg-orange-50 light:bg-black light:text-white light:hover:bg-orange-600"
             >
-              Explore The Journey
+              Enter The Space
             </a>
 
             <a
@@ -176,10 +206,10 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.15} className="relative w-full max-w-xl">
+        <Reveal delay={0.15} direction="left" className="relative w-full max-w-xl">
           <div className="absolute -inset-5 rounded-[36px] bg-gradient-to-br from-blue-500/25 via-orange-400/15 to-white/10 blur-2xl" />
 
-          <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.04] p-2 shadow-[0_0_60px_rgba(59,130,246,0.18)] backdrop-blur-md light:border-black/10 light:bg-white/70 light:shadow-xl">
+          <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.04] p-2 shadow-[0_0_60px_rgba(59,130,246,0.18)] backdrop-blur-md transition hover:scale-[1.02] light:border-black/10 light:bg-white/70 light:shadow-xl">
             <div className="relative aspect-video w-full overflow-hidden rounded-[28px]">
               <Image
                 src="/images/marvel-theme.png"
@@ -200,36 +230,112 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {/* WELCOME STORY SECTION */}
+      <section
+        id="welcome"
+        className="relative z-10 scroll-mt-24 border-y border-white/10 bg-slate-950 px-6 py-28 text-white light:border-black/10 light:bg-gradient-to-br light:from-orange-50 light:via-white light:to-blue-50 light:text-black"
+      >
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <Reveal direction="right">
+            <p className="text-sm uppercase tracking-[0.35em] text-orange-300 light:text-orange-600">
+              Start Here
+            </p>
+
+            <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
+              This is not just a page. It is a living space.
+            </h2>
+
+            <div className="mt-6 space-y-5 text-lg leading-8 text-gray-300 light:text-gray-600">
+              <p>
+                I&apos;m Marvel — a Zimbabwean creative, believer, learner and
+                builder currently growing in Germany.
+              </p>
+
+              <p>
+                This space brings together the rooms of my journey: faith,
+                travel, Germany life, media, storytelling, aviation curiosity,
+                creative experiments and the lessons that come from starting
+                again.
+              </p>
+
+              <p>
+                Some parts are polished. Some are still growing. That is the
+                point. Marvel&apos;s Space is a garden, a maze and a journal —
+                built one step at a time.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15} direction="left">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                ["Faith", "Reflections, growth and lessons.", "🌿", "#journey"],
+                ["Travel", "Countries, movement and stories.", "🧭", "#travel"],
+                ["Media", "Videos, visuals and experiments.", "🎬", "#videos"],
+                ["Resources", "Tools and ideas I’m exploring.", "🧰", "#toolbox"],
+              ].map(([title, text, icon, href]) => (
+                <a
+                  key={title}
+                  href={href}
+                  className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
+                >
+                  <p className="text-4xl transition group-hover:scale-110">
+                    {icon}
+                  </p>
+                  <h3 className="mt-5 text-2xl font-bold">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                    {text}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* JOURNEY SECTION */}
       <section
         id="journey"
-        className="relative z-10 scroll-mt-24 border-t border-white/10 bg-gradient-to-b from-black via-slate-950 to-slate-900 px-6 py-28 text-white light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50 light:text-black"
+        className="relative z-10 scroll-mt-24 border-b border-white/10 bg-gradient-to-b from-black via-slate-950 to-slate-900 px-6 py-28 text-white light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50 light:text-black"
       >
         <div className="mx-auto max-w-6xl">
-          <Reveal>
+          <Reveal direction="up">
             <p className="text-sm uppercase tracking-[0.35em] text-orange-300/80 light:text-orange-600">
               The Journey
             </p>
 
             <h2 className="mt-4 max-w-4xl text-4xl font-bold md:text-6xl">
-              From Zimbabwe to Germany, building one step at a time.
+              Countries, chapters and quiet lessons.
             </h2>
 
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              This is the story behind the work: faith, creativity, migration,
-              language, aviation dreams, AI curiosity and the courage to keep
-              growing.
+              Every country carries a different layer of the story. Hover or tap
+              a card to reveal the note behind it.
             </p>
           </Reveal>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {journeyCards.map((card, index) => (
-              <Reveal key={card.title} delay={index * 0.08}>
-                <div className="h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-1 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-orange-50">
-                  <h3 className="text-2xl font-bold">{card.title}</h3>
-                  <p className="mt-4 text-sm leading-6 text-gray-300 light:text-gray-600">
-                    {card.text}
-                  </p>
+              <Reveal key={card.title} delay={index * 0.06} direction="scale">
+                <div className="group relative min-h-[240px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm">
+                  <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-20 blur-[2px] transition duration-500 group-hover:scale-125 group-hover:opacity-10 group-hover:blur-md">
+                    {card.flag}
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent light:from-white/95 light:via-white/55 light:to-transparent" />
+
+                  <div className="relative z-10 flex min-h-[190px] flex-col justify-end">
+                    <p className="text-5xl">{card.flag}</p>
+                    <h3 className="mt-4 text-2xl font-bold">{card.title}</h3>
+
+                    <p className="mt-4 max-h-0 overflow-hidden text-sm leading-6 text-gray-300 opacity-0 transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100 light:text-gray-600">
+                      {card.text}
+                    </p>
+
+                    <p className="mt-4 text-xs uppercase tracking-[0.25em] text-orange-300 light:text-orange-600">
+                      Reveal
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -240,32 +346,42 @@ export default function Home() {
       {/* GERMANY LIFE SECTION */}
       <section
         id="germany-life"
-        className="relative z-10 scroll-mt-24 bg-white px-6 py-28 text-black"
+        className="relative z-10 scroll-mt-24 bg-slate-950 px-6 py-28 text-white light:bg-white light:text-black"
       >
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center">
-          <Reveal>
-            <p className="text-sm uppercase tracking-[0.35em] text-blue-600">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <Reveal direction="right">
+            <p className="text-sm uppercase tracking-[0.35em] text-blue-300 light:text-blue-600">
               Germany Life
             </p>
 
             <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
-              Real lessons from life, work and growth in Germany.
+              Real lessons from life, growth and starting again.
             </h2>
 
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              A living section about Ausbildung life, German language, culture
-              shocks, systems, work discipline, faith abroad and the hidden
-              lessons of starting again in a new country.
+            <p className="mt-6 text-lg leading-8 text-gray-400 light:text-gray-600">
+              Not everything needs to be public. This section keeps the focus on
+              useful reflections: language, discipline, faith abroad, systems
+              and the quiet lessons of becoming stronger in a new country.
             </p>
+
+            <a
+              href="#travel"
+              className="mt-8 inline-flex rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105 hover:bg-orange-50 light:bg-black light:text-white light:hover:bg-orange-600"
+            >
+              Continue to Travel →
+            </a>
           </Reveal>
 
           <div className="grid gap-4 sm:grid-cols-2">
             {germanyLifeCards.map((item, index) => (
-              <Reveal key={item} delay={index * 0.06}>
-                <div className="h-full rounded-3xl border border-gray-200 bg-orange-50 p-6 shadow-sm transition hover:-translate-y-1 hover:bg-blue-50">
-                  <h3 className="text-xl font-bold">{item}</h3>
-                  <p className="mt-3 text-sm leading-6 text-gray-600">
-                    Stories, tips and reflections from the real journey.
+              <Reveal key={item.title} delay={index * 0.06} direction="left">
+                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-orange-50 light:hover:bg-blue-50">
+                  <p className="text-3xl transition group-hover:scale-110">
+                    {item.icon}
+                  </p>
+                  <h3 className="mt-5 text-xl font-bold">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                    {item.text}
                   </p>
                 </div>
               </Reveal>
@@ -286,32 +402,32 @@ export default function Home() {
             </p>
 
             <h2 className="mt-4 max-w-4xl text-4xl font-extrabold md:text-6xl">
-              Countries I have been to, stories I have lived through.
+              Travel notes, culture and movement.
             </h2>
 
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              From Zimbabwe to Germany, through Turkey, the UK, Ethiopia, South
-              Africa, the Netherlands and more to come — this section carries
-              travel stories, visa lessons, culture shocks, airport experiences
-              and real reflections from moving through different countries.
+              A growing space for stories, questions, routes and reflections
+              from countries I have visited — written carefully, personally and
+              without exposing what should stay private.
             </p>
           </Reveal>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {travelCards.map((card, index) => (
-              <Reveal key={card.country} delay={index * 0.06}>
+            {journeyCards.slice(0, 6).map((card, index) => (
+              <Reveal key={card.title} delay={index * 0.06} direction="scale">
                 <a
                   href="#contact"
-                  className="group block h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-1 hover:bg-white/[0.09] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
+                  className="group block h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.09] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
                 >
-                  <h3 className="text-2xl font-bold">{card.country}</h3>
+                  <p className="text-4xl">{card.flag}</p>
+                  <h3 className="mt-5 text-2xl font-bold">{card.title}</h3>
 
                   <p className="mt-4 min-h-24 text-sm leading-6 text-gray-300 light:text-gray-600">
                     {card.text}
                   </p>
 
                   <p className="mt-6 font-semibold text-orange-300 transition group-hover:text-orange-200 light:text-orange-600">
-                    Read stories soon →
+                    Stories coming soon →
                   </p>
                 </a>
               </Reveal>
@@ -320,36 +436,77 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MISSIONS SECTION */}
-      <section
-        id="missions"
-        className="relative z-10 scroll-mt-24 bg-gradient-to-br from-orange-100 via-white to-blue-100 px-6 py-28 text-black"
-      >
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <p className="text-sm uppercase tracking-[0.35em] text-orange-600">
-              Missions
+      {/* CREATIVE WORLDS SECTION */}
+<section
+  id="creative-worlds"
+  className="relative z-10 scroll-mt-24 bg-slate-950 px-6 py-28 text-white light:bg-gradient-to-br light:from-orange-50 light:via-white light:to-blue-50 light:text-black"
+>
+  <div className="mx-auto max-w-6xl">
+    <Reveal>
+      <p className="text-sm uppercase tracking-[0.35em] text-orange-300 light:text-orange-600">
+        Creative Worlds
+      </p>
+
+      <h2 className="mt-4 max-w-4xl text-4xl font-extrabold md:text-6xl">
+        Different rooms inside the same garden.
+      </h2>
+
+      <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
+        These are the public-facing worlds I am building around story,
+        faith, travel, media and learning.
+      </p>
+    </Reveal>
+
+    <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {[
+        {
+          title: "Marvel’s Space",
+          text: "The main room for personal storytelling, faith, travel, creativity and growth.",
+          icon: "🌌",
+        },
+        {
+          title: "WildTwist Studios",
+          text: "Animated stories, playful characters and creative experiments.",
+          icon: "🐒",
+        },
+        {
+          title: "Faith & Growth",
+          text: "Reflections, lessons and honest thoughts from the journey.",
+          icon: "🌿",
+        },
+        {
+          title: "Travel Notes",
+          text: "Countries, movement, airport stories and cultural observations.",
+          icon: "🧭",
+        },
+        {
+          title: "Media Experiments",
+          text: "Video ideas, editing practice, storytelling tests and visual direction.",
+          icon: "🎬",
+        },
+        {
+          title: "Learning Journal",
+          text: "Things I am discovering while building, creating and improving.",
+          icon: "📓",
+        },
+      ].map((card, index) => (
+        <Reveal key={card.title} delay={index * 0.06} direction="scale">
+          <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:hover:bg-blue-50">
+            <p className="text-4xl transition group-hover:scale-110">
+              {card.icon}
             </p>
 
-            <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
-              Projects growing inside Marvel&apos;s Space.
-            </h2>
-          </Reveal>
+            <h3 className="mt-6 text-2xl font-bold">{card.title}</h3>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {missionCards.map((card, index) => (
-              <Reveal key={card.title} delay={index * 0.06}>
-                <div className="h-full rounded-3xl border border-black/10 bg-white/75 p-6 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-2xl font-bold">{card.title}</h3>
-                  <p className="mt-4 leading-7 text-gray-600">{card.text}</p>
-                </div>
-              </Reveal>
-            ))}
+            <p className="mt-4 leading-7 text-gray-400 light:text-gray-600">
+              {card.text}
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* MARVEL'S TOOLBOX */}
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>
       <ToolboxSection />
 
       {/* VIDEOS SECTION */}
@@ -368,19 +525,19 @@ export default function Home() {
             </h2>
 
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              Main reflections, faith stories, Germany life and creative
-              experiments live on the main channel, while WildTwist Studios
-              carries the animated and playful storytelling side.
+              Reflections, faith stories, Germany life and creative experiments
+              live on the main channel, while WildTwist Studios carries the
+              animated and playful storytelling side.
             </p>
           </Reveal>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <Reveal delay={0.1}>
+            <Reveal delay={0.1} direction="right">
               <a
                 href="https://www.youtube.com/@marvel.marodza"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-1 hover:bg-white/[0.07] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
+                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
               >
                 <div className="flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.02]">
                   ▶
@@ -389,8 +546,8 @@ export default function Home() {
                 <h3 className="mt-6 text-3xl font-bold">Marvel&apos;s Space</h3>
 
                 <p className="mt-3 leading-7 text-gray-400 light:text-gray-600">
-                  Faith, Germany life, personal growth, aviation, AI and the
-                  journey of building Marvel&apos;s Space.
+                  Faith, Germany life, personal growth, travel, media and the
+                  journey of building.
                 </p>
 
                 <p className="mt-6 font-semibold text-orange-300 light:text-orange-600">
@@ -399,12 +556,12 @@ export default function Home() {
               </a>
             </Reveal>
 
-            <Reveal delay={0.2}>
+            <Reveal delay={0.2} direction="left">
               <a
                 href="https://www.youtube.com/@WildTwistStudios"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-1 hover:bg-white/[0.07] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-orange-50"
+                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-orange-50"
               >
                 <div className="flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500/20 to-blue-500/20 text-6xl transition group-hover:scale-[1.02]">
                   🐒
@@ -429,11 +586,11 @@ export default function Home() {
       {/* CONTACT SECTION */}
       <section
         id="contact"
-        className="relative z-10 scroll-mt-24 bg-gradient-to-b from-white to-blue-50 px-6 py-28 text-black"
+        className="relative z-10 scroll-mt-24 bg-slate-950 px-6 py-28 text-white light:bg-gradient-to-b light:from-white light:to-blue-50 light:text-black"
       >
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
-            <p className="text-sm uppercase tracking-[0.35em] text-blue-600">
+            <p className="text-sm uppercase tracking-[0.35em] text-blue-300 light:text-blue-600">
               Contact
             </p>
 
@@ -441,52 +598,52 @@ export default function Home() {
               Let&apos;s build, film, create or collaborate.
             </h2>
 
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-              Whether it&apos;s media, storytelling, AI ideas, Germany life,
-              faith content or future collaborations, Marvel&apos;s Space is
-              open for meaningful connections.
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 light:text-gray-600">
+              Whether it&apos;s media, storytelling, travel, faith content or
+              future collaborations, Marvel&apos;s Space is open for meaningful
+              connections.
             </p>
           </Reveal>
 
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
-            <Reveal delay={0.1}>
+            <Reveal delay={0.1} direction="scale">
               <a
                 href="mailto:marvels.space@outlook.com"
-                className="block h-full rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:bg-blue-50"
+                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white light:hover:bg-blue-50"
               >
                 <p className="text-3xl">✉️</p>
                 <h3 className="mt-4 text-xl font-bold">Email</h3>
-                <p className="mt-2 break-words text-sm text-gray-600">
+                <p className="mt-2 break-words text-sm text-gray-400 light:text-gray-600">
                   marvels.space@outlook.com
                 </p>
               </a>
             </Reveal>
 
-            <Reveal delay={0.2}>
+            <Reveal delay={0.2} direction="scale">
               <a
                 href="https://www.instagram.com/marvelexplores"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-full rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:bg-orange-50"
+                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white light:hover:bg-orange-50"
               >
                 <p className="text-3xl">📸</p>
                 <h3 className="mt-4 text-xl font-bold">Instagram</h3>
-                <p className="mt-2 text-sm text-gray-600">
-                  Follow the visuals and updates.
+                <p className="mt-2 text-sm text-gray-400 light:text-gray-600">
+                  Follow visuals and updates.
                 </p>
               </a>
             </Reveal>
 
-            <Reveal delay={0.3}>
+            <Reveal delay={0.3} direction="scale">
               <a
                 href="https://www.tiktok.com/@marvelexplores"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-full rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:bg-gray-50"
+                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white light:hover:bg-gray-50"
               >
                 <p className="text-3xl">🎬</p>
                 <h3 className="mt-4 text-xl font-bold">TikTok</h3>
-                <p className="mt-2 text-sm text-gray-600">
+                <p className="mt-2 text-sm text-gray-400 light:text-gray-600">
                   Short videos and creative moments.
                 </p>
               </a>
