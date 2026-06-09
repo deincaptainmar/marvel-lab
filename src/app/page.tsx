@@ -624,7 +624,7 @@ export default function Home() {
 
             <Reveal delay={0.2} direction="scale">
               <a
-                href="https://www.instagram.com/@marvelexplores"
+                href="https://www.instagram.com/deincaptainmar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white light:hover:bg-orange-50"
