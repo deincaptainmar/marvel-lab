@@ -9,16 +9,16 @@ type Resource = {
   id: number;
   name: string;
   category: string;
-  review: string;
+  room: string;
+  summary: string;
   reason: string;
   rating: number;
   status: ResourceStatus;
-  imageEmoji: string;
-  affiliateUrl: string;
+  icon: string;
+  resourceUrl: string;
   youtubeUrl?: string;
   featured?: boolean;
   dateAdded: string;
-  room: string;
 };
 
 const categories = [
@@ -37,95 +37,95 @@ const resources: Resource[] = [
     id: 1,
     name: "Creator Camera Comparisons",
     category: "Camera Comparisons",
-    review:
+    room: "Camera Desk",
+    summary:
       "A public space for comparing cameras I am researching for storytelling, travel and cinematic content.",
     reason:
-      "Instead of rushing into a purchase, I want to document what matters: image quality, autofocus, sound options, portability and value.",
+      "Instead of showing private gear, this room will help visitors compare options, understand strengths and choose wisely before buying.",
     rating: 5,
     status: "Exploring",
-    imageEmoji: "📷",
-    affiliateUrl: "#",
+    icon: "📷",
+    resourceUrl: "#",
     featured: true,
-    dateAdded: "2026-06-08",
-    room: "Camera Desk",
+    dateAdded: "2026-06-09",
   },
   {
     id: 2,
     name: "Editing Workflow",
     category: "Editing & Storytelling",
-    review:
+    room: "Editing Room",
+    summary:
       "Tools and ideas around editing, sound design, color, pacing and building a stronger story.",
     reason:
-      "The goal is not just to make videos look good, but to make them feel meaningful and worth watching.",
+      "Good editing turns raw moments into meaningful stories. This room will collect workflows and lessons as I learn.",
     rating: 5,
     status: "Recommended",
-    imageEmoji: "🎬",
-    affiliateUrl: "#",
+    icon: "🎬",
+    resourceUrl: "#",
     youtubeUrl: "https://www.youtube.com/@marvel.marodza",
     featured: true,
-    dateAdded: "2026-06-08",
-    room: "Editing Room",
+    dateAdded: "2026-06-09",
   },
   {
     id: 3,
     name: "Audio & Voice Setup",
     category: "Audio & Voice",
-    review:
+    room: "Sound Corner",
+    summary:
       "A section for microphones, voice recording, interviews, calls, voiceovers and clean audio ideas.",
     reason:
-      "Good sound can make a simple video feel professional, emotional and trustworthy.",
+      "Sound carries emotion. Better audio makes stories easier to trust, understand and feel.",
     rating: 5,
     status: "Exploring",
-    imageEmoji: "🎙️",
-    affiliateUrl: "#",
+    icon: "🎙️",
+    resourceUrl: "#",
     featured: true,
-    dateAdded: "2026-06-08",
-    room: "Sound Corner",
+    dateAdded: "2026-06-09",
   },
   {
     id: 4,
-    name: "Travel Creator Gear",
+    name: "Creator Travel Gear",
     category: "Creator Travel Gear",
-    review:
-      "Lightweight gear ideas for movement, airports, trains, daily carry and filming while travelling.",
+    room: "Explorer Bag",
+    summary:
+      "Public-safe travel and creator essentials for moving, filming, charging, organizing and staying ready.",
     reason:
-      "The best setup is not always the biggest setup. Sometimes it is the one you can actually carry and use.",
+      "The goal is not to expose personal items but to help people think about practical preparation.",
     rating: 4,
     status: "Wishlist",
-    imageEmoji: "🎒",
-    affiliateUrl: "#",
-    dateAdded: "2026-06-08",
-    room: "Travel Shelf",
+    icon: "🎒",
+    resourceUrl: "#",
+    dateAdded: "2026-06-09",
   },
   {
     id: 5,
-    name: "Books & Learning Notes",
-    category: "Books & Learning",
-    review:
-      "Books, courses and learning resources that shape creativity, discipline, faith, storytelling and growth.",
+    name: "AI Tools for Creators",
+    category: "Useful Resources",
+    room: "Innovation Shelf",
+    summary:
+      "AI tools and workflows for planning, writing, editing, automation, research and creative production.",
     reason:
-      "Learning is part of the brand. What I read and study slowly shapes what I build and share.",
+      "AI can support the work, but the direction, discernment and final voice must remain human and intentional.",
     rating: 5,
     status: "Recommended",
-    imageEmoji: "📚",
-    affiliateUrl: "#",
-    dateAdded: "2026-06-08",
-    room: "Learning Shelf",
+    icon: "🤖",
+    resourceUrl: "#",
+    dateAdded: "2026-06-09",
   },
   {
     id: 6,
-    name: "Creator Apps & Resources",
-    category: "Useful Resources",
-    review:
-      "Helpful apps, services and resources for planning, editing, publishing, designing and organizing ideas.",
+    name: "Books & Learning Notes",
+    category: "Books & Learning",
+    room: "Learning Shelf",
+    summary:
+      "Books, courses, ideas and notes that shape faith, creativity, systems thinking and stewardship.",
     reason:
-      "This will become a useful public list for creators who want simple tools without confusion.",
+      "The garden grows through learning. This room will help organize useful resources without making it feel like a random shop.",
     rating: 4,
     status: "Exploring",
-    imageEmoji: "🧰",
-    affiliateUrl: "#",
-    dateAdded: "2026-06-08",
-    room: "Resource Desk",
+    icon: "📚",
+    resourceUrl: "#",
+    dateAdded: "2026-06-09",
   },
 ];
 
@@ -154,13 +154,9 @@ export default function ToolboxSection() {
         resource.category === selectedCategory ||
         (selectedCategory === "Wishlist" && resource.status === "Wishlist");
 
-      const searchValue = search.toLowerCase();
+      const searchText = `${resource.name} ${resource.category} ${resource.room} ${resource.summary}`.toLowerCase();
 
-      const matchesSearch =
-        resource.name.toLowerCase().includes(searchValue) ||
-        resource.category.toLowerCase().includes(searchValue) ||
-        resource.review.toLowerCase().includes(searchValue) ||
-        resource.room.toLowerCase().includes(searchValue);
+      const matchesSearch = searchText.includes(search.toLowerCase());
 
       return matchesCategory && matchesSearch;
     });
@@ -169,15 +165,15 @@ export default function ToolboxSection() {
       result = [...result].sort((a, b) => b.rating - a.rating);
     }
 
-    if (sort === "exploring") {
-      result = [...result].sort((a, b) =>
-        a.status === "Exploring" && b.status !== "Exploring" ? -1 : 1
-      );
-    }
-
     if (sort === "recommended") {
       result = [...result].sort((a, b) =>
         a.status === "Recommended" && b.status !== "Recommended" ? -1 : 1
+      );
+    }
+
+    if (sort === "exploring") {
+      result = [...result].sort((a, b) =>
+        a.status === "Exploring" && b.status !== "Exploring" ? -1 : 1
       );
     }
 
@@ -196,12 +192,9 @@ export default function ToolboxSection() {
   return (
     <section
       id="toolbox"
-      className="relative z-10 scroll-mt-24 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-black px-6 py-28 text-white light:from-orange-50 light:via-white light:to-blue-50 light:text-black"
+      className="relative z-10 scroll-mt-24 bg-gradient-to-b from-slate-950/78 via-black/72 to-slate-950/78 px-6 py-28 text-white backdrop-blur-[2px] light:from-orange-50/90 light:via-white/86 light:to-blue-50/90 light:text-black"
     >
-      <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
-      <div className="absolute bottom-24 right-10 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl" />
-
-      <div className="relative mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl">
         <Reveal direction="up">
           <div className="max-w-4xl">
             <p className="text-sm uppercase tracking-[0.35em] text-orange-300 light:text-orange-600">
@@ -221,8 +214,8 @@ export default function ToolboxSection() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.08}>
-          <div className="mt-10 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-6 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
+        <Reveal delay={0.08} direction="scale">
+          <div className="mt-10 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50/90 light:text-orange-900">
             <strong>Affiliate disclosure:</strong> Some links on this page may
             become affiliate links. If you purchase through them, I may earn a
             small commission at no extra cost to you. Recommendations will be
@@ -230,32 +223,12 @@ export default function ToolboxSection() {
           </div>
         </Reveal>
 
-        {/* Resource rooms */}
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["Camera Desk", "Camera comparisons and buying thoughts.", "📷"],
-            ["Editing Room", "Story, pacing, sound and color.", "🎬"],
-            ["Sound Corner", "Voice, microphones and clean audio.", "🎙️"],
-            ["Learning Shelf", "Books, courses and useful resources.", "📚"],
-          ].map(([title, text, icon], index) => (
-            <Reveal key={title} delay={index * 0.06} direction="scale">
-              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm">
-                <p className="text-4xl">{icon}</p>
-                <h3 className="mt-5 text-xl font-bold">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
-                  {text}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Featured resources */}
         <div className="mt-16">
-          <Reveal>
+          <Reveal direction="up">
             <p className="text-sm uppercase tracking-[0.25em] text-blue-300 light:text-blue-600">
               Featured Rooms
             </p>
+
             <h3 className="mt-3 text-3xl font-bold">
               Current areas of interest
             </h3>
@@ -266,13 +239,13 @@ export default function ToolboxSection() {
               <Reveal key={resource.id} delay={index * 0.08} direction="scale">
                 <button
                   onClick={() => setSelectedResource(resource)}
-                  className="group h-full w-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
+                  className="group h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/78 light:shadow-sm light:hover:bg-blue-50"
                 >
-                  <div className="flex h-36 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.03]">
-                    {resource.imageEmoji}
+                  <div className="flex h-36 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.02]">
+                    {resource.icon}
                   </div>
 
-                  <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                  <div className="mt-5 flex items-center justify-between gap-3">
                     <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300 light:bg-gray-100 light:text-gray-700">
                       {resource.room}
                     </span>
@@ -289,10 +262,10 @@ export default function ToolboxSection() {
                   <h4 className="mt-5 text-2xl font-bold">{resource.name}</h4>
 
                   <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
-                    {resource.review}
+                    {resource.summary}
                   </p>
 
-                  <p className="mt-4 text-orange-300 light:text-orange-600">
+                  <p className="mt-5 text-orange-300 light:text-orange-600">
                     {stars(resource.rating)}
                   </p>
                 </button>
@@ -301,27 +274,26 @@ export default function ToolboxSection() {
           </div>
         </div>
 
-        {/* Filters */}
-        <Reveal>
-          <div className="mt-16 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white light:shadow-sm">
+        <Reveal delay={0.1} direction="up">
+          <div className="mt-16 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white/78 light:shadow-sm">
             <div className="grid gap-4 lg:grid-cols-[1fr_240px]">
               <input
                 type="text"
                 placeholder="Search resources, rooms, tools..."
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition placeholder:text-gray-500 focus:border-orange-300 light:border-gray-200 light:bg-white light:text-black"
+                className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition placeholder:text-gray-500 focus:border-orange-300 light:border-gray-200 light:bg-white/90 light:text-black"
               />
 
               <select
                 value={sort}
                 onChange={(event) => setSort(event.target.value)}
-                className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition focus:border-orange-300 light:border-gray-200 light:bg-white light:text-black"
+                className="rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-white outline-none transition focus:border-orange-300 light:border-gray-200 light:bg-white/90 light:text-black"
               >
                 <option value="newest">Sort: Newest</option>
                 <option value="highest-rated">Sort: Highest Rated</option>
-                <option value="exploring">Sort: Exploring First</option>
-                <option value="recommended">Sort: Recommended First</option>
+                <option value="recommended">Sort: Recommended</option>
+                <option value="exploring">Sort: Exploring</option>
               </select>
             </div>
 
@@ -343,20 +315,19 @@ export default function ToolboxSection() {
           </div>
         </Reveal>
 
-        {/* Resource grid */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredResources.map((resource, index) => (
-            <Reveal key={resource.id} delay={(index % 6) * 0.04} direction="scale">
-              <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-orange-50">
+            <Reveal key={resource.id} delay={index * 0.04} direction="scale">
+              <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/78 light:shadow-sm light:hover:bg-orange-50">
                 <button
                   onClick={() => setSelectedResource(resource)}
                   className="w-full text-left"
                 >
                   <div className="flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.02]">
-                    {resource.imageEmoji}
+                    {resource.icon}
                   </div>
 
-                  <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                  <div className="mt-5 flex items-center justify-between gap-3">
                     <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300 light:bg-gray-100 light:text-gray-700">
                       {resource.category}
                     </span>
@@ -370,29 +341,29 @@ export default function ToolboxSection() {
                     </span>
                   </div>
 
-                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-blue-300 light:text-blue-600">
+                  <p className="mt-5 text-xs uppercase tracking-[0.25em] text-blue-300 light:text-blue-600">
                     {resource.room}
                   </p>
 
                   <h3 className="mt-3 text-2xl font-bold">{resource.name}</h3>
 
                   <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
-                    {resource.review}
+                    {resource.summary}
                   </p>
 
-                  <p className="mt-4 text-orange-300 light:text-orange-600">
+                  <p className="mt-5 text-orange-300 light:text-orange-600">
                     {stars(resource.rating)}
                   </p>
                 </button>
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <a
-                    href={resource.affiliateUrl}
+                    href={resource.resourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 rounded-2xl bg-white px-5 py-3 text-center font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
                   >
-                    View Resource
+                    Open Resource
                   </a>
 
                   {resource.youtubeUrl && (
@@ -411,27 +382,26 @@ export default function ToolboxSection() {
           ))}
         </div>
 
-        {/* Future expansion */}
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {[
             [
-              "Camera Comparison Notes",
-              "A future space for comparing camera options, strengths, weaknesses and buying decisions.",
-              "📷",
+              "Comparison Notes",
+              "Future public comparisons for cameras, tools, software and creator resources.",
+              "📊",
             ],
             [
               "What I’m Testing",
-              "A safe public list of apps, tools and creative workflows I am exploring.",
+              "A place for tools, apps and workflows I am trying before recommending.",
               "🧪",
             ],
             [
               "Creator Stack",
-              "A clean overview of software and resources that support content creation.",
+              "The software, media tools and creative systems behind Marvel’s Space.",
               "🧰",
             ],
           ].map(([title, text, icon], index) => (
-            <Reveal key={title} delay={index * 0.08} direction="up">
-              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 light:border-black/10 light:bg-white light:shadow-sm">
+            <Reveal key={title} delay={index * 0.08} direction="scale">
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white/78 light:shadow-sm">
                 <p className="text-4xl">{icon}</p>
                 <h3 className="mt-5 text-2xl font-bold">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
@@ -441,9 +411,40 @@ export default function ToolboxSection() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.15} direction="up">
+          <div className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-blue-600/80 to-orange-500/80 p-8 text-white shadow-[0_0_80px_rgba(59,130,246,0.16)] backdrop-blur-md md:p-10">
+            <div className="grid gap-6 md:grid-cols-[1fr_360px] md:items-center">
+              <div>
+                <h3 className="text-3xl font-bold">
+                  Future resource updates are coming.
+                </h3>
+                <p className="mt-3 text-white/80">
+                  Later, this room can connect to a newsletter where explorers
+                  receive gear notes, creator resources, AI tools and useful
+                  findings from the journey.
+                </p>
+              </div>
+
+              <form className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="min-w-0 flex-1 rounded-2xl border border-white/20 bg-white/15 px-5 py-4 text-white outline-none placeholder:text-white/70"
+                />
+
+                <button
+                  type="button"
+                  className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105"
+                >
+                  Coming Soon
+                </button>
+              </form>
+            </div>
+          </div>
+        </Reveal>
       </div>
 
-      {/* Resource detail modal */}
       {selectedResource && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/70 px-6 backdrop-blur-sm">
           <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/10 bg-slate-950 p-6 text-white shadow-2xl light:bg-white light:text-black">
@@ -466,7 +467,7 @@ export default function ToolboxSection() {
             </div>
 
             <div className="mt-6 flex h-52 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-7xl">
-              {selectedResource.imageEmoji}
+              {selectedResource.icon}
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -479,32 +480,32 @@ export default function ToolboxSection() {
               </span>
 
               <span className="rounded-full bg-white/10 px-3 py-1 text-xs light:bg-gray-100">
-                {stars(selectedResource.rating)}
+                {selectedResource.category}
               </span>
 
               <span className="rounded-full bg-white/10 px-3 py-1 text-xs light:bg-gray-100">
-                {selectedResource.category}
+                {stars(selectedResource.rating)}
               </span>
             </div>
 
-            <h4 className="mt-6 text-xl font-bold">Overview</h4>
+            <h4 className="mt-6 text-xl font-bold">Resource note</h4>
             <p className="mt-2 leading-7 text-gray-300 light:text-gray-600">
-              {selectedResource.review}
+              {selectedResource.summary}
             </p>
 
-            <h4 className="mt-6 text-xl font-bold">Why this matters</h4>
+            <h4 className="mt-6 text-xl font-bold">Why it belongs here</h4>
             <p className="mt-2 leading-7 text-gray-300 light:text-gray-600">
               {selectedResource.reason}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
-                href={selectedResource.affiliateUrl}
+                href={selectedResource.resourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 rounded-2xl bg-white px-6 py-4 text-center font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
               >
-                View Resource
+                Open Resource
               </a>
 
               {selectedResource.youtubeUrl && (

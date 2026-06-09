@@ -179,11 +179,8 @@ export default function Home() {
   return (
     <main
       id="home"
-      className="relative min-h-screen overflow-hidden bg-black text-white light:bg-white light:text-black"
+      className="relative min-h-screen overflow-hidden bg-transparent text-white light:text-black"
     >
-      <div className="fixed inset-0 -z-10 bg-black light:bg-white" />
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.18),transparent_28%),radial-gradient(circle_at_80%_30%,rgba(249,115,22,0.16),transparent_30%),radial-gradient(circle_at_50%_90%,rgba(255,255,255,0.05),transparent_35%)] light:bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.14),transparent_28%),radial-gradient(circle_at_80%_30%,rgba(249,115,22,0.12),transparent_30%),radial-gradient(circle_at_50%_90%,rgba(0,0,0,0.04),transparent_35%)]" />
-
       {/* Floating journey path */}
       <div className="pointer-events-none fixed left-5 top-1/2 z-30 hidden -translate-y-1/2 xl:block">
         <div className="relative rounded-full border border-white/10 bg-black/35 px-3 py-4 shadow-2xl backdrop-blur-xl light:border-black/10 light:bg-white/60">
@@ -304,7 +301,7 @@ export default function Home() {
       {/* GARDEN GATE */}
       <section
         id="garden-gate"
-        className="relative z-10 scroll-mt-24 border-y border-white/10 bg-slate-950 px-6 py-28 text-white light:border-black/10 light:bg-gradient-to-br light:from-orange-50 light:via-white light:to-blue-50 light:text-black"
+        className="relative z-10 scroll-mt-24 border-y border-white/10 bg-slate-950/78 px-6 py-28 text-white backdrop-blur-[2px] light:border-black/10 light:bg-gradient-to-br light:from-orange-50/90 light:via-white/86 light:to-blue-50/90 light:text-black"
       >
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <Reveal direction="right">
@@ -342,7 +339,7 @@ export default function Home() {
                 <a
                   key={room.title}
                   href={room.href}
-                  className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
+                  className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/70 light:shadow-sm light:hover:bg-blue-50"
                 >
                   <p className="text-4xl transition group-hover:scale-110">
                     {room.icon}
@@ -361,7 +358,7 @@ export default function Home() {
       {/* JOURNEY */}
       <section
         id="journey"
-        className="relative z-10 scroll-mt-24 border-b border-white/10 bg-gradient-to-b from-black via-slate-950 to-slate-900 px-6 py-28 text-white light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50 light:text-black"
+        className="relative z-10 scroll-mt-24 border-b border-white/10 bg-gradient-to-b from-black/78 via-slate-950/72 to-slate-900/78 px-6 py-28 text-white backdrop-blur-[2px] light:border-black/10 light:from-white/90 light:via-blue-50/86 light:to-orange-50/90 light:text-black"
       >
         <div className="mx-auto max-w-6xl">
           <Reveal direction="up">
@@ -383,7 +380,7 @@ export default function Home() {
             {journeyCards.map((card, index) => (
               <Reveal key={card.title} delay={index * 0.06} direction="scale">
                 <div
-                  className={`group relative min-h-[250px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br ${card.gradient} p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm`}
+                  className={`group relative min-h-[250px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br ${card.gradient} p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/70 light:shadow-sm`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center text-[8rem] opacity-10 blur-sm transition duration-500 group-hover:scale-125 group-hover:opacity-5 group-hover:blur-md">
                     {card.flag}
@@ -420,7 +417,7 @@ export default function Home() {
       {/* CURRENT CHAPTER */}
       <section
         id="current-chapter"
-        className="relative z-10 scroll-mt-24 bg-slate-950 px-6 py-28 text-white light:bg-white light:text-black"
+        className="relative z-10 scroll-mt-24 bg-slate-950/76 px-6 py-28 text-white backdrop-blur-[2px] light:bg-white/86 light:text-black"
       >
         <div className="mx-auto max-w-6xl">
           <Reveal>
@@ -443,7 +440,7 @@ export default function Home() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {currentChapterCards.map((card, index) => (
               <Reveal key={card.title} delay={index * 0.06} direction="scale">
-                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-orange-50 light:hover:bg-blue-50">
+                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-orange-50/80 light:hover:bg-blue-50">
                   <p className="text-4xl transition group-hover:scale-110">
                     {card.icon}
                   </p>
@@ -463,7 +460,7 @@ export default function Home() {
       {/* GARDEN MAP */}
       <section
         id="garden-map"
-        className="relative z-10 scroll-mt-24 bg-gradient-to-br from-slate-950 via-black to-blue-950 px-6 py-28 text-white light:from-blue-50 light:via-white light:to-orange-50 light:text-black"
+        className="relative z-10 scroll-mt-24 bg-gradient-to-br from-slate-950/78 via-black/72 to-blue-950/78 px-6 py-28 text-white backdrop-blur-[2px] light:from-blue-50/90 light:via-white/86 light:to-orange-50/90 light:text-black"
       >
         <div className="mx-auto max-w-6xl">
           <Reveal>
@@ -485,7 +482,7 @@ export default function Home() {
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {gardenRooms.map((room, index) => (
               <Reveal key={room.title} delay={index * 0.05} direction="scale">
-                <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:hover:bg-blue-50">
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/78 light:hover:bg-blue-50">
                   <div className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/40 light:border-black/10 light:bg-black/5 light:text-black/40">
                     {index < 4 ? "Open soon" : "Future room"}
                   </div>
@@ -515,7 +512,7 @@ export default function Home() {
       {/* CREATIVE STUDIO / VIDEOS */}
       <section
         id="videos"
-        className="relative z-10 scroll-mt-24 bg-black px-6 py-28 text-white light:bg-slate-100 light:text-black"
+        className="relative z-10 scroll-mt-24 bg-black/76 px-6 py-28 text-white backdrop-blur-[2px] light:bg-slate-100/88 light:text-black"
       >
         <div className="mx-auto max-w-6xl text-center">
           <Reveal>
@@ -540,7 +537,7 @@ export default function Home() {
                 href="https://www.youtube.com/@marvel.marodza"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-blue-50"
+                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white/78 light:shadow-sm light:hover:bg-blue-50"
               >
                 <div className="flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.02]">
                   ▶
@@ -564,7 +561,7 @@ export default function Home() {
                 href="https://www.youtube.com/@WildTwistStudios"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white light:shadow-sm light:hover:bg-orange-50"
+                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white/78 light:shadow-sm light:hover:bg-orange-50"
               >
                 <div className="flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500/20 to-blue-500/20 text-6xl transition group-hover:scale-[1.02]">
                   🐒
@@ -589,7 +586,7 @@ export default function Home() {
       {/* JOIN */}
       <section
         id="contact"
-        className="relative z-10 scroll-mt-24 bg-slate-950 px-6 py-28 text-white light:bg-gradient-to-b light:from-white light:to-blue-50 light:text-black"
+        className="relative z-10 scroll-mt-24 bg-slate-950/76 px-6 py-28 text-white backdrop-blur-[2px] light:bg-gradient-to-b light:from-white/90 light:to-blue-50/90 light:text-black"
       >
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
@@ -612,7 +609,7 @@ export default function Home() {
             <Reveal delay={0.1} direction="scale">
               <a
                 href="mailto:marvels.space@outlook.com"
-                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white light:hover:bg-blue-50"
+                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white/78 light:hover:bg-blue-50"
               >
                 <p className="text-3xl">✉️</p>
                 <h3 className="mt-4 text-xl font-bold">Email</h3>
@@ -627,7 +624,7 @@ export default function Home() {
                 href="https://www.instagram.com/deincaptainmar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white light:hover:bg-orange-50"
+                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white/78 light:hover:bg-orange-50"
               >
                 <p className="text-3xl">📸</p>
                 <h3 className="mt-4 text-xl font-bold">Instagram</h3>
@@ -642,7 +639,7 @@ export default function Home() {
                 href="https://www.tiktok.com/@marvelexplores"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white light:hover:bg-gray-50"
+                className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white/78 light:hover:bg-gray-50"
               >
                 <p className="text-3xl">🎬</p>
                 <h3 className="mt-4 text-xl font-bold">TikTok</h3>
