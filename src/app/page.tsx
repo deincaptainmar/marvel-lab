@@ -6,43 +6,82 @@ import HeroGeometryBackground from "@/components/HeroGeometryBackground";
 const journeyCards = [
   {
     title: "Zimbabwe",
+    code: "ZW",
     flag: "🇿🇼",
+    gradient: "from-green-500/20 via-yellow-400/10 to-red-500/20",
     text: "Roots, faith, family, early dreams and the place where the story began.",
   },
   {
     title: "Turkey",
+    code: "TR",
     flag: "🇹🇷",
+    gradient: "from-red-500/25 via-white/5 to-red-900/20",
     text: "A chapter of aviation studies, culture, discipline and becoming more aware of the world.",
   },
   {
     title: "Germany",
+    code: "DE",
     flag: "🇩🇪",
+    gradient: "from-black via-red-500/20 to-yellow-400/20",
     text: "Growth, language, work discipline, systems and learning to rebuild life step by step.",
   },
   {
     title: "United Kingdom",
+    code: "GB",
     flag: "🇬🇧",
+    gradient: "from-blue-600/25 via-white/10 to-red-500/20",
     text: "Travel memories, family moments and questions people ask about moving across borders.",
   },
   {
     title: "Netherlands",
+    code: "NL",
     flag: "🇳🇱",
+    gradient: "from-red-500/20 via-white/10 to-blue-500/25",
     text: "Short trips, European movement and quiet observations from crossing into new places.",
   },
   {
     title: "Ethiopia",
+    code: "ET",
     flag: "🇪🇹",
+    gradient: "from-green-500/20 via-yellow-400/15 to-red-500/20",
     text: "Airport routes, layovers, African movement and reflections from the journey.",
   },
   {
     title: "South Africa",
+    code: "ZA",
     flag: "🇿🇦",
+    gradient: "from-green-500/20 via-blue-500/20 to-yellow-400/15",
     text: "Southern African connections, movement, culture and stories still being shaped.",
   },
   {
     title: "More to Come",
+    code: "🌍",
     flag: "🌍",
+    gradient: "from-blue-500/20 via-orange-400/15 to-green-400/10",
     text: "The map is not complete. More countries, more stories and more lessons are still ahead.",
+  },
+];
+
+const currentChapterCards = [
+  {
+    title: "Language & Becoming",
+    text: "Learning to express myself, understand systems and grow through daily mistakes and small wins.",
+    icon: "🗣️",
+  },
+  {
+    title: "Work, Discipline & Systems",
+    text: "Observing how structure, time, responsibility and consistency shape life in a new country.",
+    icon: "⏱️",
+  },
+  {
+    title: "Faith Away From Home",
+    text: "Walking with God while far from familiar places, family rhythms and old comfort zones.",
+    icon: "🌿",
+  },
+  {
+    title: "Lessons From Starting Again",
+    text: "Germany is teaching patience, humility, resilience and the value of rebuilding step by step.",
+    icon: "🧭",
   },
 ];
 
@@ -191,7 +230,10 @@ export default function Home() {
       <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl scroll-mt-24 flex-col items-center justify-center gap-12 px-6 py-28 lg:flex-row lg:gap-16">
         <HeroGeometryBackground />
 
-        <Reveal direction="right" className="relative z-10 max-w-3xl text-center lg:text-left">
+        <Reveal
+          direction="right"
+          className="relative z-10 max-w-3xl text-center lg:text-left"
+        >
           <p className="mb-6 text-xs uppercase tracking-[0.45em] text-blue-200/80 light:text-blue-700 md:text-sm">
             Horizon Gate
           </p>
@@ -231,7 +273,11 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.15} direction="left" className="relative z-10 w-full max-w-xl">
+        <Reveal
+          delay={0.15}
+          direction="left"
+          className="relative z-10 w-full max-w-xl"
+        >
           <div className="absolute -inset-5 rounded-[36px] bg-gradient-to-br from-blue-500/25 via-orange-400/15 to-white/10 blur-2xl" />
 
           <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.04] p-2 shadow-[0_0_60px_rgba(59,130,246,0.18)] backdrop-blur-md transition hover:scale-[1.02] light:border-black/10 light:bg-white/70 light:shadow-xl">
@@ -267,7 +313,7 @@ export default function Home() {
             </p>
 
             <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
-              This is not just a website. It is a world being watered.
+              Welcome to the garden behind the horizon.
             </h2>
 
             <div className="mt-6 space-y-5 text-lg leading-8 text-gray-300 light:text-gray-600">
@@ -277,14 +323,15 @@ export default function Home() {
               </p>
 
               <p>
-                Marvel&apos;s Space exists to document discoveries, lessons,
-                systems, cultures, technologies, journeys and reflections
-                through faith-based curiosity.
+                This space is where faith-based curiosity meets real life:
+                travel, culture, systems, media, technology, stewardship,
+                lessons and the quiet process of becoming.
               </p>
 
               <p>
                 Some rooms are already open. Others are still seeds in the
-                ground. The goal is not fame. The goal is stewardship.
+                ground. The goal is not fame. The goal is to steward what God
+                gives, learn deeply and share what may help others grow.
               </p>
             </div>
           </Reveal>
@@ -335,23 +382,32 @@ export default function Home() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {journeyCards.map((card, index) => (
               <Reveal key={card.title} delay={index * 0.06} direction="scale">
-                <div className="group relative min-h-[240px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm">
-                  <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-20 blur-[2px] transition duration-500 group-hover:scale-125 group-hover:opacity-10 group-hover:blur-md">
+                <div
+                  className={`group relative min-h-[250px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br ${card.gradient} p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:shadow-sm`}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center text-[8rem] opacity-10 blur-sm transition duration-500 group-hover:scale-125 group-hover:opacity-5 group-hover:blur-md">
                     {card.flag}
                   </div>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent light:from-white/95 light:via-white/55 light:to-transparent" />
+                  <div className="absolute right-6 top-6 text-6xl opacity-0 transition duration-500 group-hover:opacity-100">
+                    {card.flag}
+                  </div>
 
-                  <div className="relative z-10 flex min-h-[190px] flex-col justify-end">
-                    <p className="text-5xl">{card.flag}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent light:from-white/95 light:via-white/60 light:to-transparent" />
+
+                  <div className="relative z-10 flex min-h-[200px] flex-col justify-end">
+                    <p className="text-4xl font-black tracking-tight text-white/80 light:text-black/80">
+                      {card.code}
+                    </p>
+
                     <h3 className="mt-4 text-2xl font-bold">{card.title}</h3>
 
                     <p className="mt-4 max-h-0 overflow-hidden text-sm leading-6 text-gray-300 opacity-0 transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100 light:text-gray-600">
                       {card.text}
                     </p>
 
-                    <p className="mt-4 text-xs uppercase tracking-[0.25em] text-orange-300 light:text-orange-600">
-                      Reveal
+                    <p className="mt-5 text-xs uppercase tracking-[0.25em] text-orange-300 light:text-orange-600">
+                      Reveal note
                     </p>
                   </div>
                 </div>
@@ -383,6 +439,24 @@ export default function Home() {
               private.
             </p>
           </Reveal>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {currentChapterCards.map((card, index) => (
+              <Reveal key={card.title} delay={index * 0.06} direction="scale">
+                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-orange-50 light:hover:bg-blue-50">
+                  <p className="text-4xl transition group-hover:scale-110">
+                    {card.icon}
+                  </p>
+
+                  <h3 className="mt-5 text-xl font-bold">{card.title}</h3>
+
+                  <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                    {card.text}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -411,13 +485,23 @@ export default function Home() {
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {gardenRooms.map((room, index) => (
               <Reveal key={room.title} delay={index * 0.05} direction="scale">
-                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:hover:bg-blue-50">
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white light:hover:bg-blue-50">
+                  <div className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/40 light:border-black/10 light:bg-black/5 light:text-black/40">
+                    {index < 4 ? "Open soon" : "Future room"}
+                  </div>
+
                   <p className="text-4xl transition group-hover:scale-110">
                     {room.icon}
                   </p>
-                  <h3 className="mt-6 text-2xl font-bold">{room.title}</h3>
+
+                  <h3 className="mt-8 text-2xl font-bold">{room.title}</h3>
+
                   <p className="mt-4 leading-7 text-gray-400 light:text-gray-600">
                     {room.text}
+                  </p>
+
+                  <p className="mt-6 text-sm font-semibold text-orange-300 opacity-0 transition group-hover:opacity-100 light:text-orange-600">
+                    Enter room →
                   </p>
                 </div>
               </Reveal>
