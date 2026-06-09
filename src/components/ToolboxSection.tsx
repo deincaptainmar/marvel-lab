@@ -154,7 +154,8 @@ export default function ToolboxSection() {
         resource.category === selectedCategory ||
         (selectedCategory === "Wishlist" && resource.status === "Wishlist");
 
-      const searchText = `${resource.name} ${resource.category} ${resource.room} ${resource.summary}`.toLowerCase();
+      const searchText =
+        `${resource.name} ${resource.category} ${resource.room} ${resource.summary}`.toLowerCase();
 
       const matchesSearch = searchText.includes(search.toLowerCase());
 
@@ -192,7 +193,7 @@ export default function ToolboxSection() {
   return (
     <section
       id="toolbox"
-      className="relative z-10 scroll-mt-24 bg-gradient-to-b from-slate-950/78 via-black/72 to-slate-950/78 px-6 py-28 text-white backdrop-blur-[2px] light:from-orange-50/90 light:via-white/86 light:to-blue-50/90 light:text-black"
+      className="relative z-10 scroll-mt-24 bg-gradient-to-b from-slate-950/52 via-black/48 to-slate-950/52 px-6 py-28 text-white backdrop-blur-[1px] light:from-orange-50/72 light:via-white/68 light:to-blue-50/72 light:text-black"
     >
       <div className="mx-auto max-w-7xl">
         <Reveal direction="up">
@@ -215,7 +216,7 @@ export default function ToolboxSection() {
         </Reveal>
 
         <Reveal delay={0.08} direction="scale">
-          <div className="mt-10 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50/90 light:text-orange-900">
+          <div className="mt-10 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 backdrop-blur-md light:border-orange-200 light:bg-orange-50/84 light:text-orange-900">
             <strong>Affiliate disclosure:</strong> Some links on this page may
             become affiliate links. If you purchase through them, I may earn a
             small commission at no extra cost to you. Recommendations will be
@@ -413,7 +414,7 @@ export default function ToolboxSection() {
         </div>
 
         <Reveal delay={0.15} direction="up">
-          <div className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-blue-600/80 to-orange-500/80 p-8 text-white shadow-[0_0_80px_rgba(59,130,246,0.16)] backdrop-blur-md md:p-10">
+          <div className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-blue-600/76 to-orange-500/76 p-8 text-white shadow-[0_0_80px_rgba(59,130,246,0.16)] backdrop-blur-md md:p-10">
             <div className="grid gap-6 md:grid-cols-[1fr_360px] md:items-center">
               <div>
                 <h3 className="text-3xl font-bold">

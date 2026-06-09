@@ -301,7 +301,7 @@ export default function Home() {
       {/* GARDEN GATE */}
       <section
         id="garden-gate"
-        className="relative z-10 scroll-mt-24 border-y border-white/10 bg-slate-950/78 px-6 py-28 text-white backdrop-blur-[2px] light:border-black/10 light:bg-gradient-to-br light:from-orange-50/90 light:via-white/86 light:to-blue-50/90 light:text-black"
+        className="relative z-10 scroll-mt-24 border-y border-white/10 bg-slate-950/52 px-6 py-28 text-white backdrop-blur-[1px] light:border-black/10 light:bg-gradient-to-br light:from-orange-50/72 light:via-white/68 light:to-blue-50/72 light:text-black"
       >
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <Reveal direction="right">
@@ -358,7 +358,7 @@ export default function Home() {
       {/* JOURNEY */}
       <section
         id="journey"
-        className="relative z-10 scroll-mt-24 border-b border-white/10 bg-gradient-to-b from-black/78 via-slate-950/72 to-slate-900/78 px-6 py-28 text-white backdrop-blur-[2px] light:border-black/10 light:from-white/90 light:via-blue-50/86 light:to-orange-50/90 light:text-black"
+        className="relative z-10 scroll-mt-24 border-b border-white/10 bg-gradient-to-b from-black/52 via-slate-950/48 to-slate-900/52 px-6 py-28 text-white backdrop-blur-[1px] light:border-black/10 light:from-white/72 light:via-blue-50/68 light:to-orange-50/72 light:text-black"
       >
         <div className="mx-auto max-w-6xl">
           <Reveal direction="up">
@@ -417,7 +417,7 @@ export default function Home() {
       {/* CURRENT CHAPTER */}
       <section
         id="current-chapter"
-        className="relative z-10 scroll-mt-24 bg-slate-950/76 px-6 py-28 text-white backdrop-blur-[2px] light:bg-white/86 light:text-black"
+        className="relative z-10 scroll-mt-24 bg-slate-950/50 px-6 py-28 text-white backdrop-blur-[1px] light:bg-white/70 light:text-black"
       >
         <div className="mx-auto max-w-6xl">
           <Reveal>
@@ -440,7 +440,7 @@ export default function Home() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {currentChapterCards.map((card, index) => (
               <Reveal key={card.title} delay={index * 0.06} direction="scale">
-                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-orange-50/80 light:hover:bg-blue-50">
+                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-orange-50/78 light:hover:bg-blue-50">
                   <p className="text-4xl transition group-hover:scale-110">
                     {card.icon}
                   </p>
@@ -460,7 +460,7 @@ export default function Home() {
       {/* GARDEN MAP */}
       <section
         id="garden-map"
-        className="relative z-10 scroll-mt-24 bg-gradient-to-br from-slate-950/78 via-black/72 to-blue-950/78 px-6 py-28 text-white backdrop-blur-[2px] light:from-blue-50/90 light:via-white/86 light:to-orange-50/90 light:text-black"
+        className="relative z-10 scroll-mt-24 bg-gradient-to-br from-slate-950/52 via-black/48 to-blue-950/52 px-6 py-28 text-white backdrop-blur-[1px] light:from-blue-50/72 light:via-white/68 light:to-orange-50/72 light:text-black"
       >
         <div className="mx-auto max-w-6xl">
           <Reveal>
@@ -512,7 +512,7 @@ export default function Home() {
       {/* CREATIVE STUDIO / VIDEOS */}
       <section
         id="videos"
-        className="relative z-10 scroll-mt-24 bg-black/76 px-6 py-28 text-white backdrop-blur-[2px] light:bg-slate-100/88 light:text-black"
+        className="relative z-10 scroll-mt-24 bg-black/50 px-6 py-28 text-white backdrop-blur-[1px] light:bg-slate-100/72 light:text-black"
       >
         <div className="mx-auto max-w-6xl text-center">
           <Reveal>
@@ -586,7 +586,7 @@ export default function Home() {
       {/* JOIN */}
       <section
         id="contact"
-        className="relative z-10 scroll-mt-24 bg-slate-950/76 px-6 py-28 text-white backdrop-blur-[2px] light:bg-gradient-to-b light:from-white/90 light:to-blue-50/90 light:text-black"
+        className="relative z-10 scroll-mt-24 bg-slate-950/50 px-6 py-28 text-white backdrop-blur-[1px] light:bg-gradient-to-b light:from-white/72 light:to-blue-50/72 light:text-black"
       >
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
