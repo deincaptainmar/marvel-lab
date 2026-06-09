@@ -28,3 +28,78 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+::selection {
+  background: rgba(249, 115, 22, 0.35);
+  color: white;
+}
+
+html.light ::selection {
+  background: rgba(59, 130, 246, 0.25);
+  color: #111111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes floatGeometrySlow {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(12px, -18px, 0) rotate(8deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes floatGeometryMedium {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(10deg);
+  }
+  50% {
+    transform: translate3d(-18px, 16px, 0) rotate(-6deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(10deg);
+  }
+}
+
+@keyframes floatGeometryFast {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+  50% {
+    transform: translate3d(10px, 14px, 0) rotate(7deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+}
+
+.float-geometry-slow {
+  animation: floatGeometrySlow 13s ease-in-out infinite;
+}
+
+.float-geometry-medium {
+  animation: floatGeometryMedium 10s ease-in-out infinite;
+}
+
+.float-geometry-fast {
+  animation: floatGeometryFast 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-geometry-slow,
+  .float-geometry-medium,
+  .float-geometry-fast {
+    animation: none;
+  }
+}

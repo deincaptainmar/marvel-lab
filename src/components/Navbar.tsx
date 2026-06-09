@@ -3,14 +3,13 @@
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
+  { name: "Horizon", href: "#home" },
+  { name: "Garden Gate", href: "#garden-gate" },
   { name: "Journey", href: "#journey" },
-  { name: "Germany Life", href: "#germany-life" },
-  { name: "Travel", href: "#travel" },
-  { name: "Creative", href: "#creative-worlds" },
-  { name: "Toolbox", href: "#toolbox" },
-  { name: "Videos", href: "#videos" },
-  { name: "Contact", href: "#contact" },
+  { name: "Garden Map", href: "#garden-map" },
+  { name: "Resources", href: "#toolbox" },
+  { name: "Studio", href: "#videos" },
+  { name: "Join", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -49,8 +48,7 @@ export default function Navbar() {
           </span>
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-5 text-sm text-gray-400 lg:flex">
+        <div className="hidden items-center gap-3 text-sm text-gray-400 xl:flex">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -70,8 +68,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Tablet / Mobile controls */}
-        <div className="flex items-center gap-3 lg:hidden">
+        <div className="flex items-center gap-3 xl:hidden">
           <button
             onClick={toggleTheme}
             className="rounded-xl border border-white/10 px-3 py-2 text-white light:border-black/10 light:text-black"
@@ -90,9 +87,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
-        <div className="border-t border-white/10 bg-black/95 px-5 py-4 light:border-black/10 light:bg-white/95 lg:hidden">
+        <div className="border-t border-white/10 bg-black/95 px-5 py-4 light:border-black/10 light:bg-white/95 xl:hidden">
           <div className="grid gap-2 text-gray-300 light:text-gray-700 sm:grid-cols-2">
             {navLinks.map((link) => (
               <a
