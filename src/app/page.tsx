@@ -153,7 +153,7 @@ const currentRooms = [
   },
   {
     title: "Resource Room",
-    text: "Media resources, camera comparisons, learning notes and useful tools.",
+    text: "Media resources, creator notes and useful tools I’m exploring.",
     icon: "🧰",
     href: "#toolbox",
   },
@@ -165,64 +165,12 @@ const currentRooms = [
   },
 ];
 
-const mazeRooms = [
-  "Horizon",
-  "Garden",
-  "Journey",
-  "Map",
-  "Resources",
-  "Studio",
-  "Join",
-];
-
 export default function Home() {
   return (
     <main
       id="home"
       className="relative min-h-screen overflow-hidden bg-transparent text-white light:text-black"
     >
-      {/* Floating journey path */}
-      <div className="pointer-events-none fixed left-5 top-1/2 z-30 hidden -translate-y-1/2 xl:block">
-        <div className="relative rounded-full border border-white/10 bg-black/35 px-3 py-4 shadow-2xl backdrop-blur-xl light:border-black/10 light:bg-white/60">
-          <div className="absolute left-[21px] top-8 h-[calc(100%-64px)] w-px bg-gradient-to-b from-blue-400/20 via-orange-300/30 to-blue-400/20" />
-
-          <div className="flex flex-col gap-4">
-            {mazeRooms.map((room, index) => {
-              const href =
-                room === "Horizon"
-                  ? "#home"
-                  : room === "Garden"
-                    ? "#garden-gate"
-                    : room === "Map"
-                      ? "#garden-map"
-                      : room === "Resources"
-                        ? "#toolbox"
-                        : room === "Studio"
-                          ? "#videos"
-                          : room === "Join"
-                            ? "#contact"
-                            : `#${room.toLowerCase()}`;
-
-              return (
-                <a
-                  key={room}
-                  href={href}
-                  className="pointer-events-auto group relative flex items-center gap-3"
-                >
-                  <span className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full border border-white/20 bg-black shadow-[0_0_20px_rgba(59,130,246,0.18)] transition group-hover:border-orange-300 group-hover:bg-orange-400 light:border-black/20 light:bg-white">
-                    <span className="h-1.5 w-1.5 rounded-full bg-white/50 transition group-hover:bg-black light:bg-black/50" />
-                  </span>
-
-                  <span className="translate-x-1 rounded-full border border-white/10 bg-black/80 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/50 opacity-0 shadow-lg transition group-hover:translate-x-0 group-hover:text-white group-hover:opacity-100 light:border-black/10 light:bg-white light:text-black/60 light:group-hover:text-black">
-                    {index + 1}. {room}
-                  </span>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
       {/* HERO / HORIZON GATE */}
       <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl scroll-mt-24 flex-col items-center justify-center gap-12 px-6 py-28 lg:flex-row lg:gap-16">
         <HeroGeometryBackground />
@@ -239,18 +187,18 @@ export default function Home() {
             Marvel&apos;s Space
           </h1>
 
-          <p className="mt-6 max-w-2xl text-xl font-semibold text-orange-200 light:text-orange-700 md:text-3xl">
-            Beyond the horizon lies another horizon.
-          </p>
-
           <p className="mt-5 max-w-2xl text-lg text-gray-300 light:text-gray-700 md:text-2xl">
-            Watering the Garden Together.
+            Watering The Garden Together
           </p>
 
           <p className="mt-6 max-w-2xl text-sm leading-7 text-gray-400 light:text-gray-600 md:text-lg">
-            A Space where Marvel is the Explorer, guided by faith-based
-            curiosity — exploring life, systems, stories, opportunities and
-            stewardship from a higher perspective.
+            A living digital space where I explore faith, Germany life, travel,
+            aviation curiosity, creativity and growth through honest stories and
+            useful lessons.
+          </p>
+
+          <p className="mt-5 max-w-2xl text-sm font-semibold text-orange-200 light:text-orange-700 md:text-base">
+            Beyond the horizon lies another horizon.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
@@ -262,10 +210,10 @@ export default function Home() {
             </a>
 
             <a
-              href="#garden-map"
+              href="#videos"
               className="rounded-2xl border border-blue-300/30 bg-white/5 px-8 py-4 text-center font-semibold text-white transition hover:scale-105 hover:border-orange-300/40 hover:bg-white/10 light:border-black/20 light:bg-white light:text-black light:hover:bg-blue-50"
             >
-              View Garden Map
+              Watch Videos
             </a>
           </div>
         </Reveal>
@@ -320,8 +268,8 @@ export default function Home() {
               </p>
 
               <p>
-                This space is where faith-based curiosity meets real life:
-                travel, culture, systems, media, technology, stewardship,
+                Marvel&apos;s Space is where faith-based curiosity meets real
+                life: travel, culture, systems, media, technology, stewardship,
                 lessons and the quiet process of becoming.
               </p>
 
@@ -422,7 +370,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm uppercase tracking-[0.35em] text-blue-300 light:text-blue-600">
-              Current Chapter
+              Germany Life
             </p>
 
             <h2 className="mt-4 max-w-4xl text-4xl font-extrabold md:text-6xl">
@@ -454,56 +402,31 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* GARDEN MAP */}
-      <section
-        id="garden-map"
-        className="relative z-10 scroll-mt-24 bg-gradient-to-br from-slate-950/52 via-black/48 to-blue-950/52 px-6 py-28 text-white backdrop-blur-[1px] light:from-blue-50/72 light:via-white/68 light:to-orange-50/72 light:text-black"
-      >
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <p className="text-sm uppercase tracking-[0.35em] text-orange-300 light:text-orange-600">
-              Garden Map
-            </p>
+          <Reveal delay={0.15} direction="up">
+            <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.05] p-8 backdrop-blur-md light:border-black/10 light:bg-white/78 light:shadow-sm">
+              <p className="text-sm uppercase tracking-[0.3em] text-orange-300 light:text-orange-600">
+                First Reflection
+              </p>
 
-            <h2 className="mt-4 max-w-4xl text-4xl font-extrabold md:text-6xl">
-              The rooms that will grow inside Marvel&apos;s Space.
-            </h2>
+              <h3 className="mt-4 max-w-3xl text-3xl font-bold md:text-4xl">
+                Starting Again in Germany: What Rebuilding Life Is Teaching Me
+              </h3>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              Some rooms are open now. Others are future branches. Together,
-              they form one connected garden of exploration, stewardship and
-              growth.
-            </p>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-gray-400 light:text-gray-600">
+                A personal reflection on growth, discipline, faith, language,
+                work, loneliness, responsibility and rebuilding life step by
+                step in a new country.
+              </p>
+
+              <button
+                type="button"
+                className="mt-7 rounded-2xl border border-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white/10 light:border-black/10 light:text-black light:hover:bg-black/5"
+              >
+                Opening soon
+              </button>
+            </div>
           </Reveal>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {gardenRooms.map((room, index) => (
-              <Reveal key={room.title} delay={index * 0.05} direction="scale">
-                <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/78 light:hover:bg-blue-50">
-                  <div className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/40 light:border-black/10 light:bg-black/5 light:text-black/40">
-                    {index < 4 ? "Open soon" : "Future room"}
-                  </div>
-
-                  <p className="text-4xl transition group-hover:scale-110">
-                    {room.icon}
-                  </p>
-
-                  <h3 className="mt-8 text-2xl font-bold">{room.title}</h3>
-
-                  <p className="mt-4 leading-7 text-gray-400 light:text-gray-600">
-                    {room.text}
-                  </p>
-
-                  <p className="mt-6 text-sm font-semibold text-orange-300 opacity-0 transition group-hover:opacity-100 light:text-orange-600">
-                    Enter room →
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -514,70 +437,101 @@ export default function Home() {
         id="videos"
         className="relative z-10 scroll-mt-24 bg-black/50 px-6 py-28 text-white backdrop-blur-[1px] light:bg-slate-100/72 light:text-black"
       >
-        <div className="mx-auto max-w-6xl text-center">
+        <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm uppercase tracking-[0.35em] text-blue-300 light:text-blue-600">
               Creative Studio
             </p>
 
-            <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
+            <h2 className="mt-4 max-w-4xl text-4xl font-extrabold md:text-6xl">
               Where ideas become stories.
             </h2>
 
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              Main reflections, faith stories, travel notes and creative
-              experiments live on the main channel, while WildTwist Studios
-              carries the playful storytelling side.
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
+              Marvel’s Space carries the personal storytelling, faith, growth,
+              Germany life and travel reflections. WildTwist Studios carries
+              the playful, animated and faceless creative experiments.
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <Reveal delay={0.1} direction="right">
-              <a
-                href="https://www.youtube.com/@marvel.marodza"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white/78 light:shadow-sm light:hover:bg-blue-50"
-              >
-                <div className="flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-6xl transition group-hover:scale-[1.02]">
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            <Reveal delay={0.1} direction="scale">
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white/78 light:shadow-sm">
+                <div className="flex aspect-video items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-orange-500/20 text-5xl">
                   ▶
                 </div>
 
-                <h3 className="mt-6 text-3xl font-bold">Marvel&apos;s Space</h3>
-
-                <p className="mt-3 leading-7 text-gray-400 light:text-gray-600">
-                  Faith, growth, travel, media and the journey of building a
-                  digital garden.
+                <p className="mt-6 text-sm uppercase tracking-[0.25em] text-blue-300 light:text-blue-600">
+                  Featured
                 </p>
 
-                <p className="mt-6 font-semibold text-orange-300 light:text-orange-600">
-                  Open YouTube →
+                <h3 className="mt-3 text-2xl font-bold">Marvel’s Space Video</h3>
+
+                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                  A future embedded video for reflections, Germany life, faith
+                  and the journey of building this digital garden.
                 </p>
-              </a>
+
+                <a
+                  href="https://www.youtube.com/@marvel.marodza"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex rounded-2xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
+                >
+                  Open YouTube
+                </a>
+              </div>
             </Reveal>
 
-            <Reveal delay={0.2} direction="left">
-              <a
-                href="https://www.youtube.com/@WildTwistStudios"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-left backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.07] light:border-black/10 light:bg-white/78 light:shadow-sm light:hover:bg-orange-50"
-              >
-                <div className="flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500/20 to-blue-500/20 text-6xl transition group-hover:scale-[1.02]">
+            <Reveal delay={0.2} direction="scale">
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white/78 light:shadow-sm">
+                <div className="flex aspect-video items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500/20 to-blue-500/20 text-5xl">
                   🐒
                 </div>
 
-                <h3 className="mt-6 text-3xl font-bold">WildTwist Studios</h3>
-
-                <p className="mt-3 leading-7 text-gray-400 light:text-gray-600">
-                  Animated stories, fun characters, short episodes and playful
-                  visual experiments.
+                <p className="mt-6 text-sm uppercase tracking-[0.25em] text-orange-300 light:text-orange-600">
+                  WildTwist
                 </p>
 
-                <p className="mt-6 font-semibold text-orange-300 light:text-orange-600">
-                  Open WildTwist →
+                <h3 className="mt-3 text-2xl font-bold">WildTwist Studios</h3>
+
+                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                  The creative side for animated, funny, playful and faceless
+                  storytelling concepts.
                 </p>
-              </a>
+
+                <a
+                  href="https://www.youtube.com/@WildTwistStudios"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex rounded-2xl border border-white/10 px-5 py-3 font-semibold text-white transition hover:bg-white/10 light:border-black/10 light:text-black light:hover:bg-black/5"
+                >
+                  Open Studio
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.3} direction="scale">
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md light:border-black/10 light:bg-white/78 light:shadow-sm">
+                <div className="flex aspect-video items-center justify-center rounded-2xl bg-gradient-to-br from-white/10 to-blue-500/20 text-5xl">
+                  ✨
+                </div>
+
+                <p className="mt-6 text-sm uppercase tracking-[0.25em] text-white/50 light:text-black/50">
+                  Coming soon
+                </p>
+
+                <h3 className="mt-3 text-2xl font-bold">Latest Upload Space</h3>
+
+                <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
+                  This card will later hold the latest upload or a real embedded
+                  video once the next featured story is ready.
+                </p>
+
+                <span className="mt-6 inline-flex rounded-2xl border border-white/10 px-5 py-3 font-semibold text-gray-500 light:border-black/10 light:text-gray-500">
+                  Embed coming
+                </span>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -591,17 +545,17 @@ export default function Home() {
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
             <p className="text-sm uppercase tracking-[0.35em] text-blue-300 light:text-blue-600">
-              Join the Explorers
+              Contact
             </p>
 
             <h2 className="mt-4 text-4xl font-extrabold md:text-6xl">
-              Follow the journey as the garden grows.
+              Let’s connect with purpose.
             </h2>
 
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              Whether it&apos;s media, storytelling, travel, faith content or
-              future collaborations, Marvel&apos;s Space is open for meaningful
-              connections.
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
+              I am open to meaningful collaborations, creative projects,
+              faith-based conversations, travel stories, media work and future
+              community building.
             </p>
           </Reveal>
 
@@ -629,7 +583,7 @@ export default function Home() {
                 <p className="text-3xl">📸</p>
                 <h3 className="mt-4 text-xl font-bold">Instagram</h3>
                 <p className="mt-2 text-sm text-gray-400 light:text-gray-600">
-                  Follow visuals and updates.
+                  deincaptainmar
                 </p>
               </a>
             </Reveal>
@@ -644,7 +598,7 @@ export default function Home() {
                 <p className="text-3xl">🎬</p>
                 <h3 className="mt-4 text-xl font-bold">TikTok</h3>
                 <p className="mt-2 text-sm text-gray-400 light:text-gray-600">
-                  Short videos and creative moments.
+                  @marvelexplores
                 </p>
               </a>
             </Reveal>
