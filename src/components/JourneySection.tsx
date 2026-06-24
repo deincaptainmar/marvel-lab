@@ -941,7 +941,7 @@ function CountryContent({
               className="relative z-10"
               style={{ transform: "translateZ(34px)" }}
             >
-              <div className="flex flex-wrap items-center justify-between gap-4">
+             <div className="flex flex-wrap items-center gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
                     Active layer
@@ -955,16 +955,6 @@ function CountryContent({
                     {selectedLayer.label}
                   </p>
                 </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-right light:border-black/10 light:bg-black/[0.03]">
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400">
-                    Signal
-                  </p>
-                  <p className="mt-1 font-bold text-cyan-200 light:text-cyan-700">
-                    Stable
-                  </p>
-                </div>
-              </div>
 
               <div
                 className="mt-8 rounded-3xl border border-white/10 bg-black/25 p-6 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700"
