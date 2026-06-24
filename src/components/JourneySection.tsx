@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef,  useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 
@@ -276,6 +276,9 @@ export default function JourneySection() {
   );
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [archiveIndex, setArchiveIndex] = useState(0);
+  const archiveModalRef = useRef<HTMLDivElement | null>(null);
+  const [archiveZoomLevel, setArchiveZoomLevel] = useState(1);
+  const [archiveIsFullscreen, setArchiveIsFullscreen] = useState(false);
 
   const activeArchiveCountry = archiveCountries[archiveIndex];
 
@@ -287,8 +290,17 @@ export default function JourneySection() {
       }
     }
 
+    function handleFullscreenChange() {
+      setArchiveIsFullscreen(Boolean(document.fullscreenElement));
+    }
+
     window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
   }, []);
 
   function nextCountry() {
@@ -299,6 +311,26 @@ export default function JourneySection() {
 
   function previousCountry() {
     setArchiveIndex((current) => (current === 0 ? current : current - 1));
+  }
+
+  async function handleArchiveFullscreen() {
+    try {
+      if (!document.fullscreenElement) {
+        await archiveModalRef.current?.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (error) {
+      console.error("Archive fullscreen toggle failed:", error);
+    }
+  }
+
+  function handleArchiveZoomIn() {
+    setArchiveZoomLevel((current) => Math.min(current + 0.1, 1.6));
+  }
+
+  function handleArchiveZoomOut() {
+    setArchiveZoomLevel((current) => Math.max(current - 0.1, 0.9));
   }
 
   return (
@@ -456,7 +488,12 @@ export default function JourneySection() {
           onClick={() => setArchiveOpen(false)}
         >
           <div
-            className="relative max-h-[88vh] w-full max-w-6xl overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-slate-950/92 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black"
+            ref={archiveModalRef}
+            className={`relative overflow-hidden border border-cyan-300/30 bg-slate-950/92 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black ${
+              archiveIsFullscreen
+                ? "h-full max-h-full w-full max-w-full rounded-none"
+                : "max-h-[88vh] w-full max-w-6xl rounded-[2rem]"
+            }`}
             onClick={(event) => event.stopPropagation()}
           >
             <div className="pointer-events-none absolute inset-0 opacity-40">
@@ -465,7 +502,11 @@ export default function JourneySection() {
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
             </div>
 
-            <div className="relative z-10 grid max-h-[88vh] overflow-y-auto lg:grid-cols-[0.75fr_1.25fr]">
+            <div
+              className={`relative z-10 grid overflow-y-auto lg:grid-cols-[0.75fr_1.25fr] ${
+                archiveIsFullscreen ? "h-full max-h-full" : "max-h-[88vh]"
+              }`}
+            >
               <div className="relative border-b border-cyan-300/20 bg-gradient-to-br from-cyan-500/14 via-black/25 to-orange-500/16 p-8 light:border-black/10 light:from-cyan-50 light:via-white light:to-orange-50">
                 <div className="flex items-start justify-between gap-5">
                   <div>
@@ -525,7 +566,10 @@ export default function JourneySection() {
                 </div>
               </div>
 
-              <CountryContent country={activeArchiveCountry} />
+              <CountryContent
+                country={activeArchiveCountry}
+                zoomLevel={archiveZoomLevel}
+              />
 
               {archiveIndex === archiveCountries.length - 1 && (
                 <div className="border-t border-white/10 p-8 text-center text-sm text-orange-200 light:border-black/10 light:text-orange-700 lg:col-span-2">
@@ -534,6 +578,14 @@ export default function JourneySection() {
                 </div>
               )}
             </div>
+
+            <ReaderControls
+              zoomLevel={archiveZoomLevel}
+              onZoomIn={handleArchiveZoomIn}
+              onZoomOut={handleArchiveZoomOut}
+              onToggleFullscreen={handleArchiveFullscreen}
+              isFullscreen={archiveIsFullscreen}
+            />
           </div>
         </div>
       )}
@@ -860,7 +912,7 @@ function CountryContent({
     <div className="p-8 md:p-10">
       <div className="flex flex-wrap items-center gap-3">
         <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200 light:text-cyan-700">
-          {country.code}
+          {country.id === "more-to-come" ? "Growing map" : country.code}
         </span>
 
         <span className="rounded-full border border-orange-300/20 bg-orange-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-orange-200 light:text-orange-700">
@@ -941,7 +993,7 @@ function CountryContent({
               className="relative z-10"
               style={{ transform: "translateZ(34px)" }}
             >
-             <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
                     Active layer
@@ -955,6 +1007,7 @@ function CountryContent({
                     {selectedLayer.label}
                   </p>
                 </div>
+              </div>
 
               <div
                 className="mt-8 rounded-3xl border border-white/10 bg-black/25 p-6 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700"
@@ -984,9 +1037,11 @@ function CountryContent({
 
                 <div className="rounded-2xl border border-orange-300/20 bg-orange-300/10 p-4">
                   <p className="text-[10px] uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
-                    Code
+                    {country.id === "more-to-come" ? "Status" : "Code"}
                   </p>
-                  <p className="mt-2 font-bold">{country.code}</p>
+                  <p className="mt-2 font-bold">
+                    {country.id === "more-to-come" ? "Growing" : country.code}
+                  </p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-black/10 light:bg-black/[0.03]">
