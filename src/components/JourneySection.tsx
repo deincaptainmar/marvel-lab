@@ -853,6 +853,8 @@ function CountryContent({
   country: CountryStory;
   zoomLevel?: number;
 }) {
+  const activePanelRef = useRef<HTMLDivElement | null>(null);
+
   const layers: {
     key: LayerKey;
     title: string;
@@ -911,11 +913,25 @@ function CountryContent({
   ];
 
   const [activeLayer, setActiveLayer] = useState<LayerKey>("opening");
+
   const selectedLayer =
     layers.find((layer) => layer.key === activeLayer) ?? layers[0];
 
+  function openLayer(layerKey: LayerKey) {
+    setActiveLayer(layerKey);
+
+    window.setTimeout(() => {
+      if (window.innerWidth < 1280) {
+        activePanelRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 80);
+  }
+
   return (
-    <div className="p-8 md:p-10">
+    <div className="p-6 md:p-10">
       <div className="flex flex-wrap items-center gap-3">
         <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200 light:text-cyan-700">
           {country.id === "more-to-come" ? "Growing map" : country.code}
@@ -927,63 +943,13 @@ function CountryContent({
       </div>
 
       <div className="mt-7 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
-        <div className="grid gap-3">
-          {layers.map((layer, index) => {
-            const isActive = layer.key === activeLayer;
-
-            return (
-              <button
-                key={layer.key}
-                type="button"
-                onClick={() => setActiveLayer(layer.key)}
-                className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition duration-300 ${
-                  isActive
-                    ? "border-cyan-300/50 bg-cyan-300/10 shadow-[0_0_35px_rgba(34,211,238,0.14)]"
-                    : "border-white/10 bg-white/[0.035] hover:border-orange-300/30 hover:bg-white/[0.06] light:border-black/10 light:bg-black/[0.03]"
-                }`}
-              >
-                <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cyan-300 to-orange-300 opacity-0 transition group-hover:opacity-100" />
-
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p
-                      className={`text-[10px] uppercase tracking-[0.22em] ${
-                        isActive
-                          ? "text-cyan-200 light:text-cyan-700"
-                          : "text-gray-500 light:text-gray-500"
-                      }`}
-                    >
-                      Layer 0{index + 1}
-                    </p>
-
-                    <h4 className="mt-2 font-bold">{layer.title}</h4>
-
-                    <p className="mt-1 text-xs text-gray-500 light:text-gray-600">
-                      {layer.label}
-                    </p>
-                  </div>
-
-                  <span
-                    className={`mt-1 rounded-full px-2 py-1 text-xs transition ${
-                      isActive
-                        ? "bg-cyan-300 text-black"
-                        : "bg-white/10 text-gray-400 light:bg-black/5"
-                    }`}
-                  >
-                    {isActive ? "OPEN" : "LOCK"}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="[perspective:1200px]">
+        {/* ACTIVE LAYER FIRST ON MOBILE, RIGHT SIDE ON DESKTOP */}
+        <div ref={activePanelRef} className="order-1 [perspective:1200px] xl:order-2">
           <div
             key={selectedLayer.key}
-            className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-cyan-300/25 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 p-7 shadow-[0_30px_90px_rgba(0,0,0,0.45)] transition duration-500 animate-in fade-in zoom-in-95 light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50"
+            className="relative min-h-[360px] overflow-hidden rounded-[2rem] border border-cyan-300/25 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.45)] transition duration-500 animate-in fade-in zoom-in-95 light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50 md:min-h-[420px] md:p-7"
             style={{
-              transform: "rotateX(2deg) rotateY(-2deg)",
+              transform: "rotateX(1.5deg) rotateY(-1.5deg)",
               transformStyle: "preserve-3d",
             }}
           >
@@ -997,7 +963,7 @@ function CountryContent({
 
             <div
               className="relative z-10"
-              style={{ transform: "translateZ(34px)" }}
+              style={{ transform: "translateZ(28px)" }}
             >
               <div className="flex flex-wrap items-center gap-4">
                 <div>
@@ -1045,6 +1011,7 @@ function CountryContent({
                   <p className="text-[10px] uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
                     {country.id === "more-to-come" ? "Status" : "Code"}
                   </p>
+
                   <p className="mt-2 font-bold">
                     {country.id === "more-to-come" ? "Growing" : country.code}
                   </p>
@@ -1067,13 +1034,66 @@ function CountryContent({
                   lineHeight: 1.8,
                 }}
               >
-                This room is still a seed in the garden. Photos, memories and deeper
-                travel notes will be planted here over time.
+                This room is still a seed in the garden. Photos, memories and
+                deeper travel notes will be planted here over time.
               </p>
             </div>
           </div>
+        </div>
+
+        {/* LAYER BUTTONS SECOND ON MOBILE, LEFT SIDE ON DESKTOP */}
+        <div className="order-2 grid gap-3 xl:order-1">
+          {layers.map((layer, index) => {
+            const isActive = layer.key === activeLayer;
+
+            return (
+              <button
+                key={layer.key}
+                type="button"
+                onClick={() => openLayer(layer.key)}
+                className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition duration-300 ${
+                  isActive
+                    ? "border-cyan-300/50 bg-cyan-300/10 shadow-[0_0_35px_rgba(34,211,238,0.14)]"
+                    : "border-white/10 bg-white/[0.035] hover:border-orange-300/30 hover:bg-white/[0.06] light:border-black/10 light:bg-black/[0.03]"
+                }`}
+              >
+                <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cyan-300 to-orange-300 opacity-0 transition group-hover:opacity-100" />
+
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p
+                      className={`text-[10px] uppercase tracking-[0.22em] ${
+                        isActive
+                          ? "text-cyan-200 light:text-cyan-700"
+                          : "text-gray-500 light:text-gray-500"
+                      }`}
+                    >
+                      Layer 0{index + 1}
+                    </p>
+
+                    <h4 className="mt-2 font-bold">{layer.title}</h4>
+
+                    <p className="mt-1 text-xs text-gray-500 light:text-gray-600">
+                      {isActive ? layer.label : "Tap to reveal this layer"}
+                    </p>
+                  </div>
+
+                  <span
+                    className={`mt-1 rounded-full px-3 py-1 text-xs font-semibold transition ${
+                      isActive
+                        ? "bg-cyan-300 text-black"
+                        : "bg-white/10 text-gray-300 light:bg-black/5 light:text-gray-600"
+                    }`}
+                  >
+                    {isActive ? "OPEN" : "UNLOCK"}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
+
