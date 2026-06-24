@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef,  useState } from "react";
 import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 
@@ -541,6 +541,109 @@ export default function JourneySection() {
   );
 }
 
+function ReaderControls({
+  zoomLevel,
+  onZoomIn,
+  onZoomOut,
+  onToggleFullscreen,
+  isFullscreen,
+}: {
+  zoomLevel: number;
+  onZoomIn: () => void;
+  onZoomOut: () => void;
+  onToggleFullscreen: () => void;
+  isFullscreen: boolean;
+}) {
+  return (
+    <div className="absolute bottom-5 right-5 z-30 flex items-center gap-2 rounded-2xl border border-cyan-300/30 bg-slate-950/75 p-2 shadow-[0_0_35px_rgba(34,211,238,0.18)] backdrop-blur-xl light:border-black/10 light:bg-white/85">
+      <button
+        type="button"
+        onClick={onZoomOut}
+        className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-200 light:border-black/10 light:bg-black/[0.03] light:text-black light:hover:bg-blue-50"
+        aria-label="Zoom out"
+        title="Zoom out"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.3-4.3" />
+          <path d="M8 11h6" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        onClick={onZoomIn}
+        className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-200 light:border-black/10 light:bg-black/[0.03] light:text-black light:hover:bg-blue-50"
+        aria-label="Zoom in"
+        title="Zoom in"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.3-4.3" />
+          <path d="M11 8v6" />
+          <path d="M8 11h6" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        onClick={onToggleFullscreen}
+        className="flex h-11 w-11 items-center justify-center rounded-xl border border-orange-300/30 bg-orange-300/10 text-orange-200 transition hover:bg-orange-300/20 light:border-orange-200 light:text-orange-700"
+        aria-label={isFullscreen ? "Exit fullscreen" : "Open fullscreen"}
+        title={isFullscreen ? "Exit fullscreen" : "Open fullscreen"}
+      >
+        {isFullscreen ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M9 3H5v4" />
+            <path d="M15 3h4v4" />
+            <path d="M9 21H5v-4" />
+            <path d="M19 21h-4v-4" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M15 3h6v6" />
+            <path d="M9 21H3v-6" />
+            <path d="M21 3l-7 7" />
+            <path d="M3 21l7-7" />
+          </svg>
+        )}
+      </button>
+
+      <div className="hidden pl-1 text-xs text-gray-400 light:text-gray-600 sm:block">
+        {Math.round(zoomLevel * 100)}%
+      </div>
+    </div>
+  );
+}
+
 function CountryHologram({
   country,
   onClose,
@@ -550,13 +653,52 @@ function CountryHologram({
   onClose: () => void;
   footerAction: ReactNode;
 }) {
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    function handleFullscreenChange() {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    }
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () =>
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  async function handleToggleFullscreen() {
+    try {
+      if (!document.fullscreenElement) {
+        await modalRef.current?.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (error) {
+      console.error("Fullscreen toggle failed:", error);
+    }
+  }
+
+  function handleZoomIn() {
+    setZoomLevel((current) => Math.min(current + 0.1, 1.6));
+  }
+
+  function handleZoomOut() {
+    setZoomLevel((current) => Math.max(current - 0.1, 0.9));
+  }
+
   return (
     <div
       className="fixed inset-0 z-[90] flex items-center justify-center bg-black/75 px-5 py-10 backdrop-blur-md"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[88vh] w-full max-w-6xl overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-slate-950/92 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black"
+        ref={modalRef}
+        className={`relative overflow-hidden border border-cyan-300/30 bg-slate-950/92 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black ${
+          isFullscreen
+            ? "h-full max-h-full w-full max-w-full rounded-none"
+            : "max-h-[88vh] w-full max-w-6xl rounded-[2rem]"
+        }`}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="pointer-events-none absolute inset-0 opacity-40">
@@ -565,7 +707,11 @@ function CountryHologram({
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
         </div>
 
-        <div className="relative z-10 grid max-h-[88vh] overflow-y-auto lg:grid-cols-[0.75fr_1.25fr]">
+        <div
+          className={`relative z-10 grid overflow-y-auto lg:grid-cols-[0.75fr_1.25fr] ${
+            isFullscreen ? "h-full max-h-full" : "max-h-[88vh]"
+          }`}
+        >
           <div className="relative border-b border-cyan-300/20 bg-gradient-to-br from-cyan-500/14 via-black/25 to-orange-500/16 p-8 light:border-black/10 light:from-cyan-50 light:via-white light:to-orange-50">
             <div className="flex items-start justify-between gap-5">
               <div>
@@ -601,16 +747,22 @@ function CountryHologram({
                 Opening scan
               </p>
 
-              <p className="mt-3 text-sm leading-7 text-gray-200 light:text-gray-700">
+              <p
+                className="mt-3 text-gray-200 light:text-gray-700"
+                style={{
+                  fontSize: `${0.98 * zoomLevel}rem`,
+                  lineHeight: 1.95,
+                }}
+              >
                 {country.hologramOpening}
               </p>
             </div>
           </div>
 
-          <div>
-            <CountryContent country={country} />
+          <div className="relative">
+            <CountryContent country={country} zoomLevel={zoomLevel} />
 
-            <div className="flex flex-col gap-3 border-t border-white/10 p-8 sm:flex-row light:border-black/10">
+            <div className="flex flex-col gap-3 border-t border-white/10 p-8 pr-28 sm:flex-row light:border-black/10">
               {footerAction}
 
               <button
@@ -623,12 +775,26 @@ function CountryHologram({
             </div>
           </div>
         </div>
+
+        <ReaderControls
+          zoomLevel={zoomLevel}
+          onZoomIn={handleZoomIn}
+          onZoomOut={handleZoomOut}
+          onToggleFullscreen={handleToggleFullscreen}
+          isFullscreen={isFullscreen}
+        />
       </div>
     </div>
   );
 }
 
-function CountryContent({ country }: { country: CountryStory }) {
+function CountryContent({
+  country,
+  zoomLevel = 1,
+}: {
+  country: CountryStory;
+  zoomLevel?: number;
+}) {
   const layers: {
     key: LayerKey;
     title: string;
@@ -687,7 +853,8 @@ function CountryContent({ country }: { country: CountryStory }) {
   ];
 
   const [activeLayer, setActiveLayer] = useState<LayerKey>("opening");
-  const selectedLayer = layers.find((layer) => layer.key === activeLayer) ?? layers[0];
+  const selectedLayer =
+    layers.find((layer) => layer.key === activeLayer) ?? layers[0];
 
   return (
     <div className="p-8 md:p-10">
@@ -799,7 +966,13 @@ function CountryContent({ country }: { country: CountryStory }) {
                 </div>
               </div>
 
-              <div className="mt-8 rounded-3xl border border-white/10 bg-black/25 p-6 text-base leading-8 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700">
+              <div
+                className="mt-8 rounded-3xl border border-white/10 bg-black/25 p-6 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700"
+                style={{
+                  fontSize: `${1 * zoomLevel}rem`,
+                  lineHeight: 1.9,
+                }}
+              >
                 {selectedLayer.ideas ? (
                   <ol className="list-decimal space-y-3 pl-5">
                     {selectedLayer.ideas.map((idea) => (
@@ -836,7 +1009,13 @@ function CountryContent({ country }: { country: CountryStory }) {
                 </div>
               </div>
 
-              <p className="mt-6 text-sm text-gray-500 light:text-gray-600">
+              <p
+                className="mt-6 text-gray-500 light:text-gray-600"
+                style={{
+                  fontSize: `${0.92 * zoomLevel}rem`,
+                  lineHeight: 1.8,
+                }}
+              >
                 This layer system starts with text. Later, photos, maps, audio,
                 video clips and personal interview notes can be attached to each
                 country room.
