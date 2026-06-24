@@ -2,6 +2,7 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import ToolboxSection from "@/components/ToolboxSection";
 import HeroGeometryBackground from "@/components/HeroGeometryBackground";
+import GermanyLifeSection from "@/components/GermanyLifeSection";
 
 const firstReflection = {
   title: "Starting Again in Germany: What Rebuilding Life Is Teaching Me",
@@ -93,82 +94,6 @@ const journeyCards = [
   },
 ];
 
-const currentChapterCards = [
-  {
-    title: "Language & Becoming",
-    text: "Learning to express myself, understand systems and grow through daily mistakes and small wins.",
-    icon: "🗣️",
-  },
-  {
-    title: "Work, Discipline & Systems",
-    text: "Observing how structure, time, responsibility and consistency shape life in a new country.",
-    icon: "⏱️",
-  },
-  {
-    title: "Faith Away From Home",
-    text: "Walking with God while far from familiar places, family rhythms and old comfort zones.",
-    icon: "🌿",
-  },
-  {
-    title: "Lessons From Starting Again",
-    text: "Germany is teaching patience, humility, resilience and the value of rebuilding step by step.",
-    icon: "🧭",
-  },
-];
-
-const gardenRooms = [
-  {
-    title: "Garden Gate",
-    text: "Faith, reflections, stewardship and the reason Marvel explores.",
-    icon: "🌿",
-  },
-  {
-    title: "Journey & Travel Notes",
-    text: "Countries, cultures, movement, stories and lessons from the road.",
-    icon: "🧭",
-  },
-  {
-    title: "Movement & Systems",
-    text: "Transport, infrastructure, logistics, aviation and how the world moves.",
-    icon: "🛫",
-  },
-  {
-    title: "Future & Innovation",
-    text: "AI, automation, digital tools, technology and emerging possibilities.",
-    icon: "🧠",
-  },
-  {
-    title: "Ecclesiastes Diversification",
-    text: "Stewardship, opportunities, business, finance and many branches.",
-    icon: "🌳",
-  },
-  {
-    title: "Building Tomorrow",
-    text: "Real estate, smart homes, sustainability and future communities.",
-    icon: "🏗️",
-  },
-  {
-    title: "Field to Table",
-    text: "Agriculture, farming, food systems, sustainability and harvest.",
-    icon: "🌾",
-  },
-  {
-    title: "Food & Places",
-    text: "Experiences, recommendations, cautions and places worth noting.",
-    icon: "🍽️",
-  },
-  {
-    title: "Creative Studio",
-    text: "Filmmaking, photography, storytelling, editing and WildTwist Studios.",
-    icon: "🎬",
-  },
-  {
-    title: "Join the Explorers",
-    text: "Future community, newsletter, interests and explorer updates.",
-    icon: "🚪",
-  },
-];
-
 const currentRooms = [
   {
     title: "Current Chapter",
@@ -193,6 +118,72 @@ const currentRooms = [
     text: "Videos, storytelling, editing experiments and creative worlds.",
     icon: "🎥",
     href: "#videos",
+  },
+];
+
+const gardenRooms = [
+  {
+    title: "Garden Gate",
+    text: "Faith, reflections, stewardship and the reason Marvel explores.",
+    icon: "🌿",
+    status: "Open",
+    href: "#garden-gate",
+  },
+  {
+    title: "Journey & Travel Notes",
+    text: "Countries, cultures, movement, stories and lessons from the road.",
+    icon: "🧭",
+    status: "Open",
+    href: "#journey",
+  },
+  {
+    title: "Germany Life",
+    text: "The current chapter: rebuilding, language, faith, discipline and growth.",
+    icon: "🇩🇪",
+    status: "Open",
+    href: "#current-chapter",
+  },
+  {
+    title: "Creative Studio",
+    text: "Filmmaking, photography, storytelling, editing and WildTwist Studios.",
+    icon: "🎬",
+    status: "Open",
+    href: "#videos",
+  },
+  {
+    title: "Resources",
+    text: "Creator notes, tools, learning resources and useful discoveries.",
+    icon: "🧰",
+    status: "Open",
+    href: "#toolbox",
+  },
+  {
+    title: "Join the Explorers",
+    text: "Contact, future community, newsletter, interests and explorer updates.",
+    icon: "🚪",
+    status: "Open",
+    href: "#contact",
+  },
+  {
+    title: "Movement & Systems",
+    text: "Transport, infrastructure, logistics, aviation and how the world moves.",
+    icon: "🛫",
+    status: "Opening soon",
+    href: "",
+  },
+  {
+    title: "Future & Innovation",
+    text: "AI, automation, digital tools, technology and emerging possibilities.",
+    icon: "🧠",
+    status: "Opening soon",
+    href: "",
+  },
+  {
+    title: "Field to Table",
+    text: "Agriculture, farming, food systems, sustainability and harvest.",
+    icon: "🌾",
+    status: "Opening soon",
+    href: "",
   },
 ];
 
@@ -334,7 +325,9 @@ export default function Home() {
                   <p className="text-4xl transition group-hover:scale-110">
                     {room.icon}
                   </p>
+
                   <h3 className="mt-5 text-2xl font-bold">{room.title}</h3>
+
                   <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
                     {room.text}
                   </p>
@@ -404,239 +397,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CURRENT CHAPTER */}
-      <section
-        id="current-chapter"
-        className="relative z-10 scroll-mt-24 bg-slate-950/50 px-6 py-28 text-white backdrop-blur-[1px] light:bg-white/70 light:text-black"
-      >
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <p className="text-sm uppercase tracking-[0.35em] text-blue-300 light:text-blue-600">
-              Germany Life
-            </p>
-
-            <h2 className="mt-4 max-w-4xl text-4xl font-extrabold md:text-6xl">
-              Germany is the current chapter, not the whole identity.
-            </h2>
-
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              This room holds useful reflections from life in Germany: language,
-              systems, growth, discipline, faith abroad and the quiet lessons of
-              rebuilding in a new place — without exposing what should stay
-              private.
-            </p>
-          </Reveal>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {currentChapterCards.map((card, index) => (
-              <Reveal key={card.title} delay={index * 0.06} direction="scale">
-                <div className="group h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-orange-50/78 light:hover:bg-blue-50">
-                  <p className="text-4xl transition group-hover:scale-110">
-                    {card.icon}
-                  </p>
-
-                  <h3 className="mt-5 text-xl font-bold">{card.title}</h3>
-
-                  <p className="mt-3 text-sm leading-6 text-gray-400 light:text-gray-600">
-                    {card.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.15} direction="up">
-            <article className="mt-12 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-[0_0_70px_rgba(59,130,246,0.12)] backdrop-blur-md light:border-black/10 light:bg-white/82 light:shadow-xl">
-              <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-                <div className="relative min-h-[280px] border-b border-white/10 bg-gradient-to-br from-blue-600/24 via-black/20 to-orange-500/24 p-8 light:border-black/10 light:from-blue-100 light:via-white light:to-orange-100">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.14),transparent_24%),radial-gradient(circle_at_80%_80%,rgba(249,115,22,0.16),transparent_28%)]" />
-
-                  <div className="relative z-10 flex h-full flex-col justify-between">
-                    <div>
-                      <p className="text-sm uppercase tracking-[0.3em] text-orange-300 light:text-orange-700">
-                        First Reflection
-                      </p>
-
-                      <h3 className="mt-5 text-3xl font-extrabold leading-tight md:text-4xl">
-                        {firstReflection.title}
-                      </h3>
-
-                      <div className="mt-6 flex flex-wrap gap-3 text-xs font-medium uppercase tracking-[0.16em] text-gray-300 light:text-gray-700">
-                        <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
-                          Written by {firstReflection.author}
-                        </span>
-
-                        <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
-                          Published: {firstReflection.publishedDisplay}
-                        </span>
-
-                        <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
-                          {firstReflection.category}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mt-10 rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-md light:border-black/10 light:bg-white/70">
-                      <p className="text-xs uppercase tracking-[0.25em] text-blue-200 light:text-blue-700">
-                        Scripture seed
-                      </p>
-
-                      <p className="mt-3 text-sm leading-7 text-gray-200 light:text-gray-700">
-                        “Your word is a lamp to my feet and a light to my
-                        path.” — Psalm 119:105
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-8 md:p-10">
-                  <p className="text-lg leading-8 text-gray-300 light:text-gray-700">
-                    {firstReflection.excerpt}
-                  </p>
-
-                  <div className="mt-6 grid gap-3 text-sm sm:grid-cols-3">
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-black/10 light:bg-black/[0.03]">
-                      <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
-                        Article title
-                      </p>
-                      <p className="mt-2 font-semibold">
-                        {firstReflection.title}
-                      </p>
-                    </div>
-
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-black/10 light:bg-black/[0.03]">
-                      <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
-                        Author
-                      </p>
-                      <p className="mt-2 font-semibold">
-                        {firstReflection.author}
-                      </p>
-                    </div>
-
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-black/10 light:bg-black/[0.03]">
-                      <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
-                        Published
-                      </p>
-                      <p className="mt-2 font-semibold">
-                        {firstReflection.publishedDisplay}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
-                    <strong>Truth-seeking note:</strong> This reflection is
-                    written from faith, but not to force anyone. It is an
-                    invitation to consider whether rebuilding life is only about
-                    success — or whether the deeper question is what life is
-                    being built on.
-                  </div>
-
-                  <details className="group mt-7 rounded-3xl border border-white/10 bg-black/25 p-5 backdrop-blur-md light:border-black/10 light:bg-black/[0.03]">
-                    <summary className="cursor-pointer list-none font-semibold text-orange-300 transition hover:text-orange-200 light:text-orange-700 light:hover:text-orange-800">
-                      Read preview
-                      <span className="ml-2 text-sm text-gray-500">
-                        opening inside this card
-                      </span>
-                    </summary>
-
-                    <div className="mt-6 space-y-5 text-sm leading-7 text-gray-300 light:text-gray-700 md:text-base md:leading-8">
-                      <p>
-                        Germany is not the whole story, but it is one of the
-                        chapters shaping me deeply.
-                      </p>
-
-                      <p>
-                        Starting again in a new country teaches you things that
-                        comfort could never teach. It teaches patience when the
-                        language does not come out the way you want. It teaches
-                        humility when simple tasks suddenly feel difficult. It
-                        teaches discipline when nobody is watching, and faith
-                        when familiar support feels far away.
-                      </p>
-
-                      <p>
-                        For me, rebuilding life in Germany has not only been
-                        about work, school, documents, transport, or learning
-                        how systems function. It has also been about becoming.
-                        Becoming more responsible. Becoming more patient.
-                        Becoming more aware of time, words, people,
-                        opportunities, and the quiet decisions that shape a
-                        life.
-                      </p>
-
-                      <p>
-                        But the deeper question is not only, “How do I rebuild
-                        my life?” The deeper question is, “What is my life being
-                        built on?”
-                      </p>
-
-                      <blockquote className="rounded-3xl border-l-4 border-orange-400 bg-white/[0.05] p-5 text-orange-100 light:bg-orange-50 light:text-orange-900">
-                        Jesus said, “I am the way, and the truth, and the
-                        life.” — John 14:6
-                      </blockquote>
-
-                      <p>
-                        That verse is not just a religious sentence to me. It
-                        is a compass. In a world full of opinions, pressure,
-                        confusion, ambition and noise, I am learning that Truth
-                        is not just information. Truth is a Person. And if that
-                        is true, then rebuilding life is not only about becoming
-                        more successful. It is about being transformed.
-                      </p>
-
-                      <p>
-                        Romans 12:2 speaks about being transformed by the
-                        renewing of the mind. That is what this season has been
-                        teaching me: new language, new systems, new discipline,
-                        but also a renewed way of seeing life.
-                      </p>
-
-                      <p>
-                        There are days when growth feels exciting. There are
-                        also days when it feels heavy. But even then, I am
-                        learning that being planted in a difficult season does
-                        not mean being forgotten. Sometimes the garden grows
-                        underground before anyone sees the fruit.
-                      </p>
-
-                      <p>
-                        Marvel’s Space exists because I do not want to waste the
-                        lessons. I want to observe, learn, reflect, and share
-                        what may help someone else who is also rebuilding,
-                        starting again, or quietly searching for Truth.
-                      </p>
-
-                      <p>
-                        Germany is teaching me that progress is not always
-                        loud. Sometimes it looks like waking up again, trying
-                        again, studying again, praying again, and choosing not
-                        to give up.
-                      </p>
-
-                      <p>This is not the end of the story.</p>
-
-                      <p>It is one horizon.</p>
-
-                      <p className="font-semibold text-orange-300 light:text-orange-700">
-                        And beyond the horizon lies another horizon.
-                      </p>
-                    </div>
-                  </details>
-
-                  <p className="mt-5 text-sm text-gray-500 light:text-gray-600">
-                    Full article page opening later. For now, this preview is
-                    planted here as the first real reflection seed by{" "}
-                    <span className="font-semibold text-gray-300 light:text-gray-800">
-                      Marvel Marodza
-                    </span>{" "}
-                    in the garden.
-                  </p>
-                </div>
-              </div>
-            </article>
-          </Reveal>
-        </div>
-      </section>
+      <GermanyLifeSection />
 
       {/* GARDEN MAP */}
       <section
@@ -663,25 +424,50 @@ export default function Home() {
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {gardenRooms.map((room, index) => (
               <Reveal key={room.title} delay={index * 0.05} direction="scale">
-                <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/78 light:hover:bg-blue-50">
-                  <div className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/40 light:border-black/10 light:bg-black/5 light:text-black/40">
-                    {index < 4 ? "Open soon" : "Future room"}
+                {room.href ? (
+                  <a
+                    href={room.href}
+                    className="group relative block h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-sm backdrop-blur transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/78 light:hover:bg-blue-50"
+                  >
+                    <div className="absolute right-5 top-5 rounded-full border border-green-300/20 bg-green-400/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-green-200 light:border-green-700/20 light:bg-green-100 light:text-green-700">
+                      {room.status}
+                    </div>
+
+                    <p className="text-4xl transition group-hover:scale-110">
+                      {room.icon}
+                    </p>
+
+                    <h3 className="mt-8 text-2xl font-bold">{room.title}</h3>
+
+                    <p className="mt-4 leading-7 text-gray-400 light:text-gray-600">
+                      {room.text}
+                    </p>
+
+                    <p className="mt-6 text-sm font-semibold text-orange-300 transition group-hover:translate-x-1 light:text-orange-600">
+                      Enter room →
+                    </p>
+                  </a>
+                ) : (
+                  <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-6 opacity-80 shadow-sm backdrop-blur light:border-black/10 light:bg-white/65">
+                    <div className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white/40 light:border-black/10 light:bg-black/5 light:text-black/40">
+                      {room.status}
+                    </div>
+
+                    <p className="text-4xl grayscale transition group-hover:scale-110">
+                      {room.icon}
+                    </p>
+
+                    <h3 className="mt-8 text-2xl font-bold">{room.title}</h3>
+
+                    <p className="mt-4 leading-7 text-gray-400 light:text-gray-600">
+                      {room.text}
+                    </p>
+
+                    <p className="mt-6 text-sm font-semibold text-gray-500">
+                      Room being planted
+                    </p>
                   </div>
-
-                  <p className="text-4xl transition group-hover:scale-110">
-                    {room.icon}
-                  </p>
-
-                  <h3 className="mt-8 text-2xl font-bold">{room.title}</h3>
-
-                  <p className="mt-4 leading-7 text-gray-400 light:text-gray-600">
-                    {room.text}
-                  </p>
-
-                  <p className="mt-6 text-sm font-semibold text-orange-300 opacity-0 transition group-hover:opacity-100 light:text-orange-600">
-                    Enter room →
-                  </p>
-                </div>
+                )}
               </Reveal>
             ))}
           </div>
@@ -826,7 +612,9 @@ export default function Home() {
                 className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white/78 light:hover:bg-blue-50"
               >
                 <p className="text-3xl">✉️</p>
+
                 <h3 className="mt-4 text-xl font-bold">Email</h3>
+
                 <p className="mt-2 break-words text-sm text-gray-400 light:text-gray-600">
                   marvels.space@outlook.com
                 </p>
@@ -841,7 +629,9 @@ export default function Home() {
                 className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white/78 light:hover:bg-orange-50"
               >
                 <p className="text-3xl">📸</p>
+
                 <h3 className="mt-4 text-xl font-bold">Instagram</h3>
+
                 <p className="mt-2 text-sm text-gray-400 light:text-gray-600">
                   deincaptainmar
                 </p>
@@ -856,7 +646,9 @@ export default function Home() {
                 className="block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-sm transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-gray-200 light:bg-white/78 light:hover:bg-gray-50"
               >
                 <p className="text-3xl">🎬</p>
+
                 <h3 className="mt-4 text-xl font-bold">TikTok</h3>
+
                 <p className="mt-2 text-sm text-gray-400 light:text-gray-600">
                   @marvelexplores
                 </p>
