@@ -125,7 +125,7 @@ const websiteJsonLd = {
 
 export default function AboutMarvelMarodzaPage() {
   return (
-    <main className="relative min-h-screen bg-transparent px-6 py-16 text-white light:text-black md:py-24">
+    <main className="relative min-h-screen bg-transparent px-6 pb-16 pt-44 text-white light:text-black sm:pt-40 md:pb-24 md:pt-40">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
