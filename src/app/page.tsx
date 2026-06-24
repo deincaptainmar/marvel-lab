@@ -3,6 +3,7 @@ import Reveal from "@/components/Reveal";
 import ToolboxSection from "@/components/ToolboxSection";
 import HeroGeometryBackground from "@/components/HeroGeometryBackground";
 import GermanyLifeSection from "@/components/GermanyLifeSection";
+import JourneySection from "@/components/JourneySection";
 
 const firstReflection = {
   title: "Starting Again in Germany: What Rebuilding Life Is Teaching Me",
@@ -35,65 +36,6 @@ const firstReflectionJsonLd = {
   },
 };
 
-const journeyCards = [
-  {
-    title: "Zimbabwe",
-    code: "ZW",
-    flag: "🇿🇼",
-    gradient: "from-green-500/20 via-yellow-400/10 to-red-500/20",
-    text: "Roots, faith, family, early dreams and the place where the story began.",
-  },
-  {
-    title: "Turkey",
-    code: "TR",
-    flag: "🇹🇷",
-    gradient: "from-red-500/25 via-white/5 to-red-900/20",
-    text: "A chapter of aviation studies, culture, discipline and becoming more aware of the world.",
-  },
-  {
-    title: "Germany",
-    code: "DE",
-    flag: "🇩🇪",
-    gradient: "from-black via-red-500/20 to-yellow-400/20",
-    text: "Growth, language, work discipline, systems and learning to rebuild life step by step.",
-  },
-  {
-    title: "United Kingdom",
-    code: "GB",
-    flag: "🇬🇧",
-    gradient: "from-blue-600/25 via-white/10 to-red-500/20",
-    text: "Travel memories, family moments and questions people ask about moving across borders.",
-  },
-  {
-    title: "Netherlands",
-    code: "NL",
-    flag: "🇳🇱",
-    gradient: "from-red-500/20 via-white/10 to-blue-500/25",
-    text: "Short trips, European movement and quiet observations from crossing into new places.",
-  },
-  {
-    title: "Ethiopia",
-    code: "ET",
-    flag: "🇪🇹",
-    gradient: "from-green-500/20 via-yellow-400/15 to-red-500/20",
-    text: "Airport routes, layovers, African movement and reflections from the journey.",
-  },
-  {
-    title: "South Africa",
-    code: "ZA",
-    flag: "🇿🇦",
-    gradient: "from-green-500/20 via-blue-500/20 to-yellow-400/15",
-    text: "Southern African connections, movement, culture and stories still being shaped.",
-  },
-  {
-    title: "More to Come",
-    code: "🌍",
-    flag: "🌍",
-    gradient: "from-blue-500/20 via-orange-400/15 to-green-400/10",
-    text: "The map is not complete. More countries, more stories and more lessons are still ahead.",
-  },
-];
-
 const currentRooms = [
   {
     title: "Current Chapter",
@@ -122,27 +64,6 @@ const currentRooms = [
 ];
 
 const gardenRooms = [
-  {
-    title: "Garden Gate",
-    text: "Faith, reflections, stewardship and the reason Marvel explores.",
-    icon: "🌿",
-    status: "Open",
-    href: "#garden-gate",
-  },
-  {
-    title: "Journey & Travel Notes",
-    text: "Countries, cultures, movement, stories and lessons from the road.",
-    icon: "🧭",
-    status: "Open",
-    href: "#journey",
-  },
-  {
-    title: "Germany Life",
-    text: "The current chapter: rebuilding, language, faith, discipline and growth.",
-    icon: "🇩🇪",
-    status: "Open",
-    href: "#current-chapter",
-  },
   {
     title: "Creative Studio",
     text: "Filmmaking, photography, storytelling, editing and WildTwist Studios.",
@@ -182,6 +103,27 @@ const gardenRooms = [
     title: "Field to Table",
     text: "Agriculture, farming, food systems, sustainability and harvest.",
     icon: "🌾",
+    status: "Opening soon",
+    href: "",
+  },
+  {
+    title: "Building Tomorrow",
+    text: "Real estate, smart homes, sustainability and future communities.",
+    icon: "🏗️",
+    status: "Opening soon",
+    href: "",
+  },
+  {
+    title: "Food & Places",
+    text: "Experiences, recommendations, cautions and places worth noting.",
+    icon: "🍽️",
+    status: "Opening soon",
+    href: "",
+  },
+  {
+    title: "Ecclesiastes Diversification",
+    text: "Stewardship, opportunities, business, finance and many branches.",
+    icon: "🌳",
     status: "Opening soon",
     href: "",
   },
@@ -338,64 +280,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JOURNEY */}
-      <section
-        id="journey"
-        className="relative z-10 scroll-mt-24 border-b border-white/10 bg-gradient-to-b from-black/52 via-slate-950/48 to-slate-900/52 px-6 py-28 text-white backdrop-blur-[1px] light:border-black/10 light:from-white/72 light:via-blue-50/68 light:to-orange-50/72 light:text-black"
-      >
-        <div className="mx-auto max-w-6xl">
-          <Reveal direction="up">
-            <p className="text-sm uppercase tracking-[0.35em] text-orange-300/80 light:text-orange-600">
-              Journey & Travel Notes
-            </p>
-
-            <h2 className="mt-4 max-w-4xl text-4xl font-bold md:text-6xl">
-              Countries, chapters and quiet lessons.
-            </h2>
-
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              Every country carries a different layer of the story. Hover or tap
-              a card to reveal the note behind it.
-            </p>
-          </Reveal>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {journeyCards.map((card, index) => (
-              <Reveal key={card.title} delay={index * 0.06} direction="scale">
-                <div
-                  className={`group relative min-h-[250px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br ${card.gradient} p-6 backdrop-blur-md transition hover:-translate-y-2 hover:bg-white/[0.08] light:border-black/10 light:bg-white/70 light:shadow-sm`}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center text-[8rem] opacity-10 blur-sm transition duration-500 group-hover:scale-125 group-hover:opacity-5 group-hover:blur-md">
-                    {card.flag}
-                  </div>
-
-                  <div className="absolute right-6 top-6 text-6xl opacity-0 transition duration-500 group-hover:opacity-100">
-                    {card.flag}
-                  </div>
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent light:from-white/95 light:via-white/60 light:to-transparent" />
-
-                  <div className="relative z-10 flex min-h-[200px] flex-col justify-end">
-                    <p className="text-4xl font-black tracking-tight text-white/80 light:text-black/80">
-                      {card.code}
-                    </p>
-
-                    <h3 className="mt-4 text-2xl font-bold">{card.title}</h3>
-
-                    <p className="mt-4 max-h-0 overflow-hidden text-sm leading-6 text-gray-300 opacity-0 transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100 light:text-gray-600">
-                      {card.text}
-                    </p>
-
-                    <p className="mt-5 text-xs uppercase tracking-[0.25em] text-orange-300 light:text-orange-600">
-                      Reveal note
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <JourneySection />
 
       <GermanyLifeSection />
 
@@ -411,13 +296,12 @@ export default function Home() {
             </p>
 
             <h2 className="mt-4 max-w-4xl text-4xl font-extrabold md:text-6xl">
-              The rooms that will grow inside Marvel&apos;s Space.
+              Choose where to continue exploring.
             </h2>
 
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-400 light:text-gray-600">
-              Some rooms are open now. Others are future branches. Together,
-              they form one connected garden of exploration, stewardship and
-              growth.
+              You have entered the garden. These are the open rooms and future
+              branches growing inside Marvel&apos;s Space.
             </p>
           </Reveal>
 
