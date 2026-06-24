@@ -1016,9 +1016,8 @@ function CountryContent({
                   lineHeight: 1.8,
                 }}
               >
-                This layer system starts with text. Later, photos, maps, audio,
-                video clips and personal interview notes can be attached to each
-                country room.
+                This room is still a seed in the garden. Photos, memories and deeper
+                travel notes will be planted here over time.
               </p>
             </div>
           </div>
