@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 
 type CountryStory = {
@@ -20,6 +21,16 @@ type CountryStory = {
   currentAffairs: string;
   futureIdeas: string[];
 };
+
+type LayerKey =
+  | "opening"
+  | "history"
+  | "culture"
+  | "reflection"
+  | "lessons"
+  | "tourism"
+  | "current"
+  | "future";
 
 const rootCountries: CountryStory[] = [
   {
@@ -448,6 +459,12 @@ export default function JourneySection() {
             className="relative max-h-[88vh] w-full max-w-6xl overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-slate-950/92 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black"
             onClick={(event) => event.stopPropagation()}
           >
+            <div className="pointer-events-none absolute inset-0 opacity-40">
+              <div className="absolute left-10 top-10 h-40 w-40 rounded-full border border-cyan-300/20" />
+              <div className="absolute bottom-10 right-10 h-56 w-56 rounded-full border border-orange-300/20" />
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
+            </div>
+
             <div className="relative z-10 grid max-h-[88vh] overflow-y-auto lg:grid-cols-[0.75fr_1.25fr]">
               <div className="relative border-b border-cyan-300/20 bg-gradient-to-br from-cyan-500/14 via-black/25 to-orange-500/16 p-8 light:border-black/10 light:from-cyan-50 light:via-white light:to-orange-50">
                 <div className="flex items-start justify-between gap-5">
@@ -531,7 +548,7 @@ function CountryHologram({
 }: {
   country: CountryStory;
   onClose: () => void;
-  footerAction: React.ReactNode;
+  footerAction: ReactNode;
 }) {
   return (
     <div
@@ -542,6 +559,12 @@ function CountryHologram({
         className="relative max-h-[88vh] w-full max-w-6xl overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-slate-950/92 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black"
         onClick={(event) => event.stopPropagation()}
       >
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute left-10 top-10 h-40 w-40 rounded-full border border-cyan-300/20" />
+          <div className="absolute bottom-10 right-10 h-56 w-56 rounded-full border border-orange-300/20" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
+        </div>
+
         <div className="relative z-10 grid max-h-[88vh] overflow-y-auto lg:grid-cols-[0.75fr_1.25fr]">
           <div className="relative border-b border-cyan-300/20 bg-gradient-to-br from-cyan-500/14 via-black/25 to-orange-500/16 p-8 light:border-black/10 light:from-cyan-50 light:via-white light:to-orange-50">
             <div className="flex items-start justify-between gap-5">
@@ -550,7 +573,9 @@ function CountryHologram({
                   Country Hologram
                 </p>
 
-                <p className="mt-5 text-6xl">{country.flag}</p>
+                <p className="mt-6 text-5xl font-black tracking-tight text-white/90 light:text-black/90">
+                  {country.code}
+                </p>
 
                 <h3 className="mt-6 text-4xl font-extrabold leading-tight md:text-5xl">
                   {country.shortTitle}
@@ -573,7 +598,7 @@ function CountryHologram({
 
             <div className="mt-10 rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-md light:border-black/10 light:bg-white/70">
               <p className="text-xs uppercase tracking-[0.25em] text-cyan-200 light:text-cyan-700">
-                Opening note
+                Opening scan
               </p>
 
               <p className="mt-3 text-sm leading-7 text-gray-200 light:text-gray-700">
@@ -604,6 +629,66 @@ function CountryHologram({
 }
 
 function CountryContent({ country }: { country: CountryStory }) {
+  const layers: {
+    key: LayerKey;
+    title: string;
+    label: string;
+    text?: string;
+    ideas?: string[];
+  }[] = [
+    {
+      key: "opening",
+      title: "Opening scan",
+      label: "Main country signal",
+      text: country.hologramOpening,
+    },
+    {
+      key: "history",
+      title: "History / background",
+      label: "Context layer",
+      text: country.background,
+    },
+    {
+      key: "culture",
+      title: "Culture notes",
+      label: "People and rhythm",
+      text: country.culture,
+    },
+    {
+      key: "reflection",
+      title: "My experience",
+      label: "Personal layer",
+      text: country.reflection,
+    },
+    {
+      key: "lessons",
+      title: "Lessons learned",
+      label: "Wisdom seed",
+      text: country.lesson,
+    },
+    {
+      key: "tourism",
+      title: "Tourism guide angle",
+      label: "Explorer guide",
+      text: country.tourism,
+    },
+    {
+      key: "current",
+      title: "Current affairs angle",
+      label: "Future research",
+      text: country.currentAffairs,
+    },
+    {
+      key: "future",
+      title: "Future content ideas",
+      label: "Content seeds",
+      ideas: country.futureIdeas,
+    },
+  ];
+
+  const [activeLayer, setActiveLayer] = useState<LayerKey>("opening");
+  const selectedLayer = layers.find((layer) => layer.key === activeLayer) ?? layers[0];
+
   return (
     <div className="p-8 md:p-10">
       <div className="flex flex-wrap items-center gap-3">
@@ -612,44 +697,154 @@ function CountryContent({ country }: { country: CountryStory }) {
         </span>
 
         <span className="rounded-full border border-orange-300/20 bg-orange-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-orange-200 light:text-orange-700">
-          Journey Archive
+          Interactive data layers
         </span>
       </div>
 
-      <p className="mt-7 text-lg leading-8 text-gray-300 light:text-gray-700">
-        {country.hologramOpening}
-      </p>
+      <div className="mt-7 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
+        <div className="grid gap-3">
+          {layers.map((layer, index) => {
+            const isActive = layer.key === activeLayer;
 
-      <div className="mt-7 grid gap-5">
-        <InfoBlock title="History / background angle" text={country.background} />
-        <InfoBlock title="Culture notes" text={country.culture} />
-        <InfoBlock title="My experience / personal reflection" text={country.reflection} />
-        <InfoBlock title="Lessons learned" text={country.lesson} />
-        <InfoBlock title="Tourism / travel guide angle" text={country.tourism} />
-        <InfoBlock title="Current affairs angle" text={country.currentAffairs} />
+            return (
+              <button
+                key={layer.key}
+                type="button"
+                onClick={() => setActiveLayer(layer.key)}
+                className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition duration-300 ${
+                  isActive
+                    ? "border-cyan-300/50 bg-cyan-300/10 shadow-[0_0_35px_rgba(34,211,238,0.14)]"
+                    : "border-white/10 bg-white/[0.035] hover:border-orange-300/30 hover:bg-white/[0.06] light:border-black/10 light:bg-black/[0.03]"
+                }`}
+              >
+                <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cyan-300 to-orange-300 opacity-0 transition group-hover:opacity-100" />
+
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p
+                      className={`text-[10px] uppercase tracking-[0.22em] ${
+                        isActive
+                          ? "text-cyan-200 light:text-cyan-700"
+                          : "text-gray-500 light:text-gray-500"
+                      }`}
+                    >
+                      Layer 0{index + 1}
+                    </p>
+
+                    <h4 className="mt-2 font-bold">{layer.title}</h4>
+
+                    <p className="mt-1 text-xs text-gray-500 light:text-gray-600">
+                      {layer.label}
+                    </p>
+                  </div>
+
+                  <span
+                    className={`mt-1 rounded-full px-2 py-1 text-xs transition ${
+                      isActive
+                        ? "bg-cyan-300 text-black"
+                        : "bg-white/10 text-gray-400 light:bg-black/5"
+                    }`}
+                  >
+                    {isActive ? "OPEN" : "LOCK"}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="[perspective:1200px]">
+          <div
+            key={selectedLayer.key}
+            className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-cyan-300/25 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 p-7 shadow-[0_30px_90px_rgba(0,0,0,0.45)] transition duration-500 animate-in fade-in zoom-in-95 light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50"
+            style={{
+              transform: "rotateX(2deg) rotateY(-2deg)",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            <div className="pointer-events-none absolute inset-0 opacity-40">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
+              <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-orange-300 to-transparent" />
+              <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border border-cyan-300/20" />
+              <div className="absolute -bottom-24 left-12 h-48 w-48 rounded-full border border-orange-300/20" />
+              <div className="absolute left-0 right-0 top-1/2 h-px bg-cyan-300/10" />
+            </div>
+
+            <div
+              className="relative z-10"
+              style={{ transform: "translateZ(34px)" }}
+            >
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
+                    Active layer
+                  </p>
+
+                  <h3 className="mt-3 text-3xl font-extrabold md:text-4xl">
+                    {selectedLayer.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
+                    {selectedLayer.label}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-right light:border-black/10 light:bg-black/[0.03]">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400">
+                    Signal
+                  </p>
+                  <p className="mt-1 font-bold text-cyan-200 light:text-cyan-700">
+                    Stable
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 rounded-3xl border border-white/10 bg-black/25 p-6 text-base leading-8 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700">
+                {selectedLayer.ideas ? (
+                  <ol className="list-decimal space-y-3 pl-5">
+                    {selectedLayer.ideas.map((idea) => (
+                      <li key={idea}>{idea}</li>
+                    ))}
+                  </ol>
+                ) : (
+                  <p>{selectedLayer.text}</p>
+                )}
+              </div>
+
+              <div className="mt-7 grid gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-cyan-200 light:text-cyan-700">
+                    Country
+                  </p>
+                  <p className="mt-2 font-bold">{country.shortTitle}</p>
+                </div>
+
+                <div className="rounded-2xl border border-orange-300/20 bg-orange-300/10 p-4">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
+                    Code
+                  </p>
+                  <p className="mt-2 font-bold">{country.code}</p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-black/10 light:bg-black/[0.03]">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400">
+                    Media
+                  </p>
+                  <p className="mt-2 font-bold text-gray-300 light:text-gray-700">
+                    Photos later
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-6 text-sm text-gray-500 light:text-gray-600">
+                This layer system starts with text. Later, photos, maps, audio,
+                video clips and personal interview notes can be attached to each
+                country room.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className="mt-7 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
-        <strong>Future content ideas:</strong>
-        <ol className="mt-3 list-decimal space-y-2 pl-5">
-          {country.futureIdeas.map((idea) => (
-            <li key={idea}>{idea}</li>
-          ))}
-        </ol>
-      </div>
-    </div>
-  );
-}
-
-function InfoBlock({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 light:border-black/10 light:bg-black/[0.03]">
-      <p className="text-xs uppercase tracking-[0.22em] text-orange-300 light:text-orange-700">
-        {title}
-      </p>
-      <p className="mt-3 text-sm leading-7 text-gray-300 light:text-gray-700">
-        {text}
-      </p>
     </div>
   );
 }
