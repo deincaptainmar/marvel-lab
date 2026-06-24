@@ -545,7 +545,20 @@ export default function JourneySection() {
                   </p>
                 </div>
 
-                <div className="mt-6 flex gap-3">
+                {archiveIndex === archiveCountries.length - 1 && (
+                  <div className="mt-5 rounded-3xl border border-orange-300/25 bg-orange-400/10 p-5 shadow-[0_0_35px_rgba(249,115,22,0.12)] light:border-orange-200 light:bg-orange-50">
+                    <p className="text-xs uppercase tracking-[0.25em] text-orange-200 light:text-orange-700">
+                      Archive checkpoint
+                    </p>
+
+                    <p className="mt-3 text-sm leading-7 text-orange-100 light:text-orange-900">
+                      So far, these are the places explored. More chapters will
+                      be planted as the journey grows.
+                    </p>
+                  </div>
+                )}
+
+                <div className="mt-7 flex gap-3">
                   <button
                     type="button"
                     onClick={previousCountry}
@@ -570,13 +583,6 @@ export default function JourneySection() {
                 country={activeArchiveCountry}
                 zoomLevel={archiveZoomLevel}
               />
-
-              {archiveIndex === archiveCountries.length - 1 && (
-                <div className="border-t border-white/10 p-8 text-center text-sm text-orange-200 light:border-black/10 light:text-orange-700 lg:col-span-2">
-                  So far, these are the places explored. More chapters will be
-                  planted as the journey grows.
-                </div>
-              )}
             </div>
 
             <ReaderControls
