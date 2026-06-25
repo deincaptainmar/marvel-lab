@@ -1023,7 +1023,7 @@ function CountryContent({
             </p>
 
             <p className="mt-5 text-sm leading-7 text-gray-300 light:text-gray-700">
-              Tap to open this layer as a focused hologram.
+              Tap to open this story layer.
             </p>
           </button>
         </div>
@@ -1118,6 +1118,60 @@ function LayerCardContent({
   );
 }
 
+
+function getLayerExtras(
+  country: CountryStory,
+  layer: {
+    key: LayerKey;
+    title: string;
+    label: string;
+    text?: string;
+    ideas?: string[];
+  }
+) {
+  const countryName = country.shortTitle;
+
+  const questions: Record<LayerKey, string> = {
+    opening: `If ${countryName} was a doorway in the journey, what would you notice first?`,
+    history: `What old story might still be shaping life in ${countryName} today?`,
+    culture: `What sound, food, greeting, rhythm, or everyday habit would you want to observe first?`,
+    reflection: `What would this chapter teach you if you had to walk through it yourself?`,
+    lessons: `Which lesson from ${countryName} feels useful for your own journey?`,
+    tourism: `If you had one day to explore with curiosity, where would your feet take you first?`,
+    current: `What present-day question would help you understand ${countryName} beyond the surface?`,
+    future: `Which future story should be planted first in this country room?`,
+  };
+
+  const didYouKnow: Record<LayerKey, string> = {
+    opening: `${countryName} is stored here as more than a flag. It is treated as a chapter with memory, movement, learning, and perspective.`,
+    history: `History is not only dates and monuments. It can hide inside language, food, roads, cities, beliefs, and the way people remember where they came from.`,
+    culture: `Culture is often found in small things: how people greet, share food, move through cities, respect time, tell stories, and welcome strangers.`,
+    reflection: `A personal travel note becomes stronger when it does not only say “I went there,” but asks, “What did this place teach me?”`,
+    lessons: `Every country room in Marvel’s Space is meant to leave a small seed: something useful, honest, and worth carrying into life.`,
+    tourism: `The best travel guide is not only a list of places. It also teaches respect, preparation, curiosity, and how to enter a place with humility.`,
+    current: `Current affairs will be added carefully over time, focusing on broad themes such as youth, transport, culture, education, opportunity, and systems.`,
+    future: `This archive is designed to grow slowly. Photos, maps, videos, interviews, and deeper stories can be planted later without overcrowding the page today.`,
+  };
+
+  const gems: Record<LayerKey, string> = {
+    opening: country.hologramOpening,
+    history: country.background,
+    culture: country.culture,
+    reflection: country.reflection,
+    lessons: country.lesson,
+    tourism: country.tourism,
+    current: country.currentAffairs,
+    future: "The map is still growing. More chapters will be planted as the journey expands.",
+  };
+
+  return {
+    question: questions[layer.key],
+    didYouKnow: didYouKnow[layer.key],
+    gem: gems[layer.key],
+  };
+}
+
+
 function LayerFocusModal({
   country,
   layer,
@@ -1168,12 +1222,12 @@ function LayerFocusModal({
                 </span>
 
                 <span className="rounded-full border border-orange-300/20 bg-orange-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-orange-200 light:text-orange-700">
-                  Focused layer
+                  Story portal
                 </span>
               </div>
 
               <p className="mt-7 text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
-                Layer hologram
+                Explorer story layer
               </p>
 
               <h3 className="mt-3 text-4xl font-extrabold md:text-5xl">
@@ -1213,27 +1267,74 @@ function LayerFocusModal({
             )}
           </div>
 
-          <CountryMiniMeta country={country} />
+          <LayerDiscoveryExtras country={country} layer={layer} />
 
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
+              className="w-full rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105 light:bg-black light:text-white sm:w-auto"
             >
               Close layer
             </button>
-
-            <p className="rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-4 text-sm leading-6 text-gray-400 light:border-black/10 light:bg-black/[0.03] light:text-gray-600">
-              The country room stays behind this focused layer so the visitor
-              can read without getting lost in the long scroll.
-            </p>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+
+function LayerDiscoveryExtras({
+  country,
+  layer,
+}: {
+  country: CountryStory;
+  layer: {
+    key: LayerKey;
+    title: string;
+    label: string;
+    text?: string;
+    ideas?: string[];
+  };
+}) {
+  const extras = getLayerExtras(country, layer);
+
+  return (
+    <div className="mt-7 grid gap-4">
+      <div className="rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-5">
+        <p className="text-xs uppercase tracking-[0.25em] text-cyan-200 light:text-cyan-700">
+          Explorer question
+        </p>
+
+        <p className="mt-3 text-base font-semibold leading-7 text-gray-100 light:text-gray-800">
+          {extras.question}
+        </p>
+      </div>
+
+      <div className="rounded-3xl border border-orange-300/20 bg-orange-300/10 p-5">
+        <p className="text-xs uppercase tracking-[0.25em] text-orange-200 light:text-orange-700">
+          Did you know?
+        </p>
+
+        <p className="mt-3 text-sm leading-7 text-orange-50 light:text-orange-900">
+          {extras.didYouKnow}
+        </p>
+      </div>
+
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 light:border-black/10 light:bg-black/[0.03]">
+        <p className="text-xs uppercase tracking-[0.25em] text-gray-400">
+          Garden gem
+        </p>
+
+        <p className="mt-3 text-sm leading-7 text-gray-300 light:text-gray-700">
+          {extras.gem}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 
 function CountryMiniMeta({ country }: { country: CountryStory }) {
   return (
