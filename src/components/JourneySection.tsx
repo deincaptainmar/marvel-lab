@@ -800,7 +800,7 @@ function CountryHologram({
               </button>
             </div>
 
-            <div className="mt-10 rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-md light:border-black/10 light:bg-white/70">
+            <div className="mt-10 hidden rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-md light:border-black/10 light:bg-white/70 md:block">
               <p className="text-xs uppercase tracking-[0.25em] text-cyan-200 light:text-cyan-700">
                 Opening scan
               </p>
@@ -853,8 +853,6 @@ function CountryContent({
   country: CountryStory;
   zoomLevel?: number;
 }) {
-  const activePanelRef = useRef<HTMLDivElement | null>(null);
-
   const layers: {
     key: LayerKey;
     title: string;
@@ -913,21 +911,18 @@ function CountryContent({
   ];
 
   const [activeLayer, setActiveLayer] = useState<LayerKey>("opening");
+  const [focusedLayer, setFocusedLayer] = useState<LayerKey | null>(null);
 
   const selectedLayer =
     layers.find((layer) => layer.key === activeLayer) ?? layers[0];
 
+  const focusedLayerData = focusedLayer
+    ? layers.find((layer) => layer.key === focusedLayer) ?? null
+    : null;
+
   function openLayer(layerKey: LayerKey) {
     setActiveLayer(layerKey);
-
-    window.setTimeout(() => {
-      if (window.innerWidth < 1280) {
-        activePanelRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }, 80);
+    setFocusedLayer(layerKey);
   }
 
   return (
@@ -943,105 +938,6 @@ function CountryContent({
       </div>
 
       <div className="mt-7 grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
-        {/* ACTIVE LAYER FIRST ON MOBILE, RIGHT SIDE ON DESKTOP */}
-        <div ref={activePanelRef} className="order-1 [perspective:1200px] xl:order-2">
-          <div
-            key={selectedLayer.key}
-            className="relative min-h-[360px] overflow-hidden rounded-[2rem] border border-cyan-300/25 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.45)] transition duration-500 animate-in fade-in zoom-in-95 light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50 md:min-h-[420px] md:p-7"
-            style={{
-              transform: "rotateX(1.5deg) rotateY(-1.5deg)",
-              transformStyle: "preserve-3d",
-            }}
-          >
-            <div className="pointer-events-none absolute inset-0 opacity-40">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
-              <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-orange-300 to-transparent" />
-              <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border border-cyan-300/20" />
-              <div className="absolute -bottom-24 left-12 h-48 w-48 rounded-full border border-orange-300/20" />
-              <div className="absolute left-0 right-0 top-1/2 h-px bg-cyan-300/10" />
-            </div>
-
-            <div
-              className="relative z-10"
-              style={{ transform: "translateZ(28px)" }}
-            >
-              <div className="flex flex-wrap items-center gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
-                    Active layer
-                  </p>
-
-                  <h3 className="mt-3 text-3xl font-extrabold md:text-4xl">
-                    {selectedLayer.title}
-                  </h3>
-
-                  <p className="mt-2 text-sm uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
-                    {selectedLayer.label}
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className="mt-8 rounded-3xl border border-white/10 bg-black/25 p-6 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700"
-                style={{
-                  fontSize: `${1 * zoomLevel}rem`,
-                  lineHeight: 1.9,
-                }}
-              >
-                {selectedLayer.ideas ? (
-                  <ol className="list-decimal space-y-3 pl-5">
-                    {selectedLayer.ideas.map((idea) => (
-                      <li key={idea}>{idea}</li>
-                    ))}
-                  </ol>
-                ) : (
-                  <p>{selectedLayer.text}</p>
-                )}
-              </div>
-
-              <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-cyan-200 light:text-cyan-700">
-                    Country
-                  </p>
-                  <p className="mt-2 font-bold">{country.shortTitle}</p>
-                </div>
-
-                <div className="rounded-2xl border border-orange-300/20 bg-orange-300/10 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
-                    {country.id === "more-to-come" ? "Status" : "Code"}
-                  </p>
-
-                  <p className="mt-2 font-bold">
-                    {country.id === "more-to-come" ? "Growing" : country.code}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-black/10 light:bg-black/[0.03]">
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400">
-                    Media
-                  </p>
-                  <p className="mt-2 font-bold text-gray-300 light:text-gray-700">
-                    Photos later
-                  </p>
-                </div>
-              </div>
-
-              <p
-                className="mt-6 text-gray-500 light:text-gray-600"
-                style={{
-                  fontSize: `${0.92 * zoomLevel}rem`,
-                  lineHeight: 1.8,
-                }}
-              >
-                This room is still a seed in the garden. Photos, memories and
-                deeper travel notes will be planted here over time.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* LAYER BUTTONS SECOND ON MOBILE, LEFT SIDE ON DESKTOP */}
         <div className="order-2 grid gap-3 xl:order-1">
           {layers.map((layer, index) => {
             const isActive = layer.key === activeLayer;
@@ -1092,8 +988,281 @@ function CountryContent({
             );
           })}
         </div>
+
+        <div className="order-1 [perspective:1200px] xl:order-2">
+          <div
+            key={selectedLayer.key}
+            className="relative hidden min-h-[360px] overflow-hidden rounded-[2rem] border border-cyan-300/25 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.45)] transition duration-500 animate-in fade-in zoom-in-95 light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50 md:min-h-[420px] md:p-7 xl:block"
+            style={{
+              transform: "rotateX(1.5deg) rotateY(-1.5deg)",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            <LayerCardContent
+              country={country}
+              layer={selectedLayer}
+              zoomLevel={zoomLevel}
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setFocusedLayer(activeLayer)}
+            className="group relative block w-full overflow-hidden rounded-[2rem] border border-cyan-300/25 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 p-6 text-left shadow-[0_30px_90px_rgba(0,0,0,0.45)] transition hover:border-cyan-300/45 light:border-black/10 light:from-white light:via-blue-50 light:to-orange-50 xl:hidden"
+          >
+            <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
+              Active layer
+            </p>
+
+            <h3 className="mt-3 text-3xl font-extrabold">
+              {selectedLayer.title}
+            </h3>
+
+            <p className="mt-2 text-sm uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
+              {selectedLayer.label}
+            </p>
+
+            <p className="mt-5 text-sm leading-7 text-gray-300 light:text-gray-700">
+              Tap to open this layer as a focused hologram.
+            </p>
+          </button>
+        </div>
+      </div>
+
+      {focusedLayerData && (
+        <LayerFocusModal
+          country={country}
+          layer={focusedLayerData}
+          zoomLevel={zoomLevel}
+          onClose={() => setFocusedLayer(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+function LayerCardContent({
+  country,
+  layer,
+  zoomLevel,
+}: {
+  country: CountryStory;
+  layer: {
+    key: LayerKey;
+    title: string;
+    label: string;
+    text?: string;
+    ideas?: string[];
+  };
+  zoomLevel: number;
+}) {
+  return (
+    <>
+      <div className="pointer-events-none absolute inset-0 opacity-40">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-orange-300 to-transparent" />
+        <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border border-cyan-300/20" />
+        <div className="absolute -bottom-24 left-12 h-48 w-48 rounded-full border border-orange-300/20" />
+        <div className="absolute left-0 right-0 top-1/2 h-px bg-cyan-300/10" />
+      </div>
+
+      <div className="relative z-10" style={{ transform: "translateZ(28px)" }}>
+        <div className="flex flex-wrap items-center gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
+              Active layer
+            </p>
+
+            <h3 className="mt-3 text-3xl font-extrabold md:text-4xl">
+              {layer.title}
+            </h3>
+
+            <p className="mt-2 text-sm uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
+              {layer.label}
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="mt-8 rounded-3xl border border-white/10 bg-black/25 p-6 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700"
+          style={{
+            fontSize: `${1 * zoomLevel}rem`,
+            lineHeight: 1.9,
+          }}
+        >
+          {layer.ideas ? (
+            <ol className="list-decimal space-y-3 pl-5">
+              {layer.ideas.map((idea) => (
+                <li key={idea}>{idea}</li>
+              ))}
+            </ol>
+          ) : (
+            <p>{layer.text}</p>
+          )}
+        </div>
+
+        <CountryMiniMeta country={country} />
+
+        <p
+          className="mt-6 text-gray-500 light:text-gray-600"
+          style={{
+            fontSize: `${0.92 * zoomLevel}rem`,
+            lineHeight: 1.8,
+          }}
+        >
+          This room is still a seed in the garden. Photos, memories and deeper
+          travel notes will be planted here over time.
+        </p>
+      </div>
+    </>
+  );
+}
+
+function LayerFocusModal({
+  country,
+  layer,
+  zoomLevel,
+  onClose,
+}: {
+  country: CountryStory;
+  layer: {
+    key: LayerKey;
+    title: string;
+    label: string;
+    text?: string;
+    ideas?: string[];
+  };
+  zoomLevel: number;
+  onClose: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-[120] flex items-center justify-center bg-black/80 px-5 py-8 backdrop-blur-xl"
+      onClick={onClose}
+    >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-6 top-24 h-24 w-24 animate-pulse rounded-full border border-cyan-300/20 bg-cyan-300/5" />
+        <div className="absolute right-10 top-1/3 h-32 w-32 rounded-full border border-orange-300/20 bg-orange-300/5" />
+        <div className="absolute bottom-20 left-1/4 h-20 w-20 rounded-full border border-white/10" />
+        <div className="absolute left-1/2 top-16 h-2 w-2 rounded-full bg-cyan-200/80 shadow-[0_0_22px_rgba(165,243,252,0.9)]" />
+        <div className="absolute bottom-32 right-1/4 h-2 w-2 rounded-full bg-orange-200/80 shadow-[0_0_22px_rgba(254,215,170,0.9)]" />
+      </div>
+
+      <div
+        className="relative max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-cyan-300/30 bg-slate-950/94 p-6 text-white shadow-[0_0_100px_rgba(34,211,238,0.26)] backdrop-blur-2xl light:bg-white/95 light:text-black md:p-8"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-300 to-transparent" />
+          <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border border-cyan-300/20" />
+          <div className="absolute -bottom-20 left-8 h-44 w-44 rounded-full border border-orange-300/20" />
+        </div>
+
+        <div className="relative z-10">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200 light:text-cyan-700">
+                  {country.id === "more-to-come" ? "Growing map" : country.code}
+                </span>
+
+                <span className="rounded-full border border-orange-300/20 bg-orange-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-orange-200 light:text-orange-700">
+                  Focused layer
+                </span>
+              </div>
+
+              <p className="mt-7 text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
+                Layer hologram
+              </p>
+
+              <h3 className="mt-3 text-4xl font-extrabold md:text-5xl">
+                {layer.title}
+              </h3>
+
+              <p className="mt-3 text-sm uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
+                {layer.label}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-white transition hover:bg-white/20 light:border-black/10 light:bg-black/5 light:text-black"
+              aria-label="Close layer hologram"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div
+            className="mt-8 rounded-3xl border border-white/10 bg-black/30 p-6 text-gray-200 shadow-inner light:border-black/10 light:bg-white/70 light:text-gray-700"
+            style={{
+              fontSize: `${1.02 * zoomLevel}rem`,
+              lineHeight: 1.95,
+            }}
+          >
+            {layer.ideas ? (
+              <ol className="list-decimal space-y-3 pl-5">
+                {layer.ideas.map((idea) => (
+                  <li key={idea}>{idea}</li>
+                ))}
+              </ol>
+            ) : (
+              <p>{layer.text}</p>
+            )}
+          </div>
+
+          <CountryMiniMeta country={country} />
+
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
+            >
+              Close layer
+            </button>
+
+            <p className="rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-4 text-sm leading-6 text-gray-400 light:border-black/10 light:bg-black/[0.03] light:text-gray-600">
+              The country room stays behind this focused layer so the visitor
+              can read without getting lost in the long scroll.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
+function CountryMiniMeta({ country }: { country: CountryStory }) {
+  return (
+    <div className="mt-7 grid gap-3 sm:grid-cols-3">
+      <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-cyan-200 light:text-cyan-700">
+          Country
+        </p>
+        <p className="mt-2 font-bold">{country.shortTitle}</p>
+      </div>
+
+      <div className="rounded-2xl border border-orange-300/20 bg-orange-300/10 p-4">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
+          {country.id === "more-to-come" ? "Status" : "Code"}
+        </p>
+
+        <p className="mt-2 font-bold">
+          {country.id === "more-to-come" ? "Growing" : country.code}
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-black/10 light:bg-black/[0.03]">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400">
+          Media
+        </p>
+        <p className="mt-2 font-bold text-gray-300 light:text-gray-700">
+          Photos later
+        </p>
+      </div>
+    </div>
+  );
+}
