@@ -1154,14 +1154,29 @@ function getLayerExtras(
   };
 
   const gems: Record<LayerKey, string> = {
-    opening: country.hologramOpening,
-    history: country.background,
-    culture: country.culture,
-    reflection: country.reflection,
-    lessons: country.lesson,
-    tourism: country.tourism,
-    current: country.currentAffairs,
-    future: "The map is still growing. More chapters will be planted as the journey expands.",
+    opening:
+      `${countryName} is not just a point on the map. The first gem is to slow down, look again, and ask what this place is opening in the story.`,
+
+    history:
+      `${countryName}'s older stories still shape how people move, build, remember and belong today. History is not dead background; it quietly shapes the present.`,
+
+    culture:
+      `${countryName} shows that culture lives in everyday details: greetings, food, language, family rhythms, time, respect and the way people welcome or protect one another.`,
+
+    reflection:
+      `The personal gem is that a country can become a mirror. It does not only show new places; it can reveal what is growing, healing or changing inside the explorer.`,
+
+    lessons:
+      `The treasure is not collecting countries like trophies. The treasure is collecting wisdom, humility, perspective and better questions from every place explored.`,
+
+    tourism:
+      `A good explorer does not only ask, "What can I see?" The better question is, "What should I understand before I arrive?" Respect makes travel deeper.`,
+
+    current:
+      `${countryName}'s present story is still unfolding. The gem is to watch people, systems, youth, movement, opportunity and challenges with patience instead of shallow conclusions.`,
+
+    future:
+      `The map is still growing. More chapters will come, but each new route should add meaning, not just another flag.`,
   };
 
   return {
