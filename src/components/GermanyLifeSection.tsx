@@ -87,18 +87,33 @@ const firstReflection = {
   author: "Marvel Marodza",
   publishedDisplay: "12 June 2026",
   category: "Germany Life / Faith & Growth",
+  scripture:
+    "“Your word is a lamp to my feet and a light to my path.” — Psalm 119:105",
   excerpt:
     "A personal reflection on growth, discipline, faith, language, work, loneliness, responsibility and rebuilding life step by step in a new country — with the quiet question beneath it all: what is Truth, and where does a life really find its way?",
+  truthNote:
+    "This reflection is written from faith, but not to force anyone. It is an invitation to consider whether rebuilding life is only about success — or whether the deeper question is what life is being built on.",
+  preview: [
+    "Germany is not the whole story, but it is one of the chapters shaping me deeply.",
+    "Starting again in a new country teaches you things that comfort could never teach. It teaches patience when the language does not come out the way you want. It teaches humility when simple tasks suddenly feel difficult. It teaches discipline when nobody is watching, and faith when familiar support feels far away.",
+    "But the deeper question is not only, “How do I rebuild my life?” The deeper question is, “What is my life being built on?”",
+    "Jesus said, “I am the way, and the truth, and the life.” — John 14:6",
+    "That verse is not just a religious sentence to me. It is a compass. In a world full of opinions, pressure, confusion, ambition and noise, I am learning that Truth is not just information. Truth is a Person.",
+    "And beyond the horizon lies another horizon.",
+  ],
 };
 
 export default function GermanyLifeSection() {
   const [selectedCard, setSelectedCard] =
     useState<(typeof germanyLifeCards)[number] | null>(null);
 
+  const [reflectionOpen, setReflectionOpen] = useState(false);
+
   useEffect(() => {
     function closeOnEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setSelectedCard(null);
+        setReflectionOpen(false);
       }
     }
 
@@ -172,46 +187,31 @@ export default function GermanyLifeSection() {
         </div>
 
         <Reveal delay={0.2} direction="up">
-          <article className="mt-12 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-[0_0_70px_rgba(59,130,246,0.12)] backdrop-blur-md light:border-black/10 light:bg-white/82 light:shadow-xl">
-            <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="relative min-h-[280px] border-b border-white/10 bg-gradient-to-br from-blue-600/24 via-black/20 to-orange-500/24 p-8 light:border-black/10 light:from-blue-100 light:via-white light:to-orange-100">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.14),transparent_24%),radial-gradient(circle_at_80%_80%,rgba(249,115,22,0.16),transparent_28%)]" />
+          <button
+            type="button"
+            onClick={() => setReflectionOpen(true)}
+            className="group relative mt-12 w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] p-0 text-left shadow-[0_0_70px_rgba(59,130,246,0.12)] backdrop-blur-md transition hover:-translate-y-1 hover:border-orange-300/35 hover:bg-white/[0.075] light:border-black/10 light:bg-white/82 light:shadow-xl light:hover:bg-orange-50"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.10),transparent_24%),radial-gradient(circle_at_82%_80%,rgba(249,115,22,0.14),transparent_28%)]" />
 
-                <div className="relative z-10 flex h-full flex-col justify-between">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.3em] text-orange-300 light:text-orange-700">
-                      First Reflection
-                    </p>
+            <div className="relative z-10 grid gap-0 lg:grid-cols-[0.85fr_1.15fr]">
+              <div className="border-b border-white/10 bg-gradient-to-br from-blue-600/24 via-black/20 to-orange-500/24 p-8 light:border-black/10 light:from-blue-100 light:via-white light:to-orange-100">
+                <p className="text-sm uppercase tracking-[0.3em] text-orange-300 light:text-orange-700">
+                  First Reflection
+                </p>
 
-                    <h3 className="mt-5 text-3xl font-extrabold leading-tight md:text-4xl">
-                      {firstReflection.title}
-                    </h3>
+                <h3 className="mt-5 text-3xl font-extrabold leading-tight md:text-4xl">
+                  {firstReflection.title}
+                </h3>
 
-                    <div className="mt-6 flex flex-wrap gap-3 text-xs font-medium uppercase tracking-[0.16em] text-gray-300 light:text-gray-700">
-                      <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
-                        Written by {firstReflection.author}
-                      </span>
+                <div className="mt-6 flex flex-wrap gap-3 text-xs font-medium uppercase tracking-[0.16em] text-gray-300 light:text-gray-700">
+                  <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
+                    Written by {firstReflection.author}
+                  </span>
 
-                      <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
-                        Published: {firstReflection.publishedDisplay}
-                      </span>
-
-                      <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
-                        {firstReflection.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-10 rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-md light:border-black/10 light:bg-white/70">
-                    <p className="text-xs uppercase tracking-[0.25em] text-blue-200 light:text-blue-700">
-                      Scripture seed
-                    </p>
-
-                    <p className="mt-3 text-sm leading-7 text-gray-200 light:text-gray-700">
-                      “Your word is a lamp to my feet and a light to my path.”
-                      — Psalm 119:105
-                    </p>
-                  </div>
+                  <span className="rounded-full border border-white/10 bg-black/25 px-3 py-2 light:border-black/10 light:bg-white/60">
+                    Published: {firstReflection.publishedDisplay}
+                  </span>
                 </div>
               </div>
 
@@ -221,201 +221,270 @@ export default function GermanyLifeSection() {
                 </p>
 
                 <div className="mt-6 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
-                  <strong>Truth-seeking note:</strong> This reflection is
-                  written from faith, but not to force anyone. It is an
-                  invitation to consider whether rebuilding life is only about
-                  success — or whether the deeper question is what life is being
-                  built on.
+                  <strong>Truth-seeking note:</strong>{" "}
+                  {firstReflection.truthNote}
                 </div>
 
-                <details className="group mt-7 rounded-3xl border border-white/10 bg-black/25 p-5 backdrop-blur-md light:border-black/10 light:bg-black/[0.03]">
-                  <summary className="cursor-pointer list-none font-semibold text-orange-300 transition hover:text-orange-200 light:text-orange-700 light:hover:text-orange-800">
-                    Read preview
-                    <span className="ml-2 text-sm text-gray-500">
-                      opening inside this card
-                    </span>
-                  </summary>
-
-                  <div className="mt-6 space-y-5 text-sm leading-7 text-gray-300 light:text-gray-700 md:text-base md:leading-8">
-                    <p>
-                      Germany is not the whole story, but it is one of the
-                      chapters shaping me deeply.
-                    </p>
-
-                    <p>
-                      Starting again in a new country teaches you things that
-                      comfort could never teach. It teaches patience when the
-                      language does not come out the way you want. It teaches
-                      humility when simple tasks suddenly feel difficult. It
-                      teaches discipline when nobody is watching, and faith when
-                      familiar support feels far away.
-                    </p>
-
-                    <p>
-                      But the deeper question is not only, “How do I rebuild my
-                      life?” The deeper question is, “What is my life being
-                      built on?”
-                    </p>
-
-                    <blockquote className="rounded-3xl border-l-4 border-orange-400 bg-white/[0.05] p-5 text-orange-100 light:bg-orange-50 light:text-orange-900">
-                      Jesus said, “I am the way, and the truth, and the life.”
-                      — John 14:6
-                    </blockquote>
-
-                    <p>
-                      That verse is not just a religious sentence to me. It is a
-                      compass. In a world full of opinions, pressure, confusion,
-                      ambition and noise, I am learning that Truth is not just
-                      information. Truth is a Person.
-                    </p>
-
-                    <p className="font-semibold text-orange-300 light:text-orange-700">
-                      And beyond the horizon lies another horizon.
-                    </p>
-                  </div>
-                </details>
-
-                <p className="mt-5 text-sm text-gray-500 light:text-gray-600">
-                  Full article page opening later. For now, this preview is
-                  planted here as the first real reflection seed by{" "}
-                  <span className="font-semibold text-gray-300 light:text-gray-800">
-                    Marvel Marodza
-                  </span>{" "}
-                  in the garden.
+                <p className="mt-7 text-sm font-semibold text-cyan-300 transition group-hover:translate-x-1 light:text-cyan-700">
+                  Open reflection hologram →
                 </p>
               </div>
             </div>
-          </article>
+          </button>
         </Reveal>
       </div>
 
       {selectedCard && (
-        <div
-          className="fixed inset-0 z-[90] flex items-center justify-center bg-black/75 px-5 py-10 backdrop-blur-md"
-          onClick={() => setSelectedCard(null)}
-        >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(34,211,238,0.12),transparent_30%),radial-gradient(circle_at_70%_70%,rgba(249,115,22,0.12),transparent_28%)]" />
+        <GermanyLifeHologram
+          selectedCard={selectedCard}
+          onClose={() => setSelectedCard(null)}
+        />
+      )}
 
-          <div
-            className="relative max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-slate-950/90 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="pointer-events-none absolute inset-0 opacity-40">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-300 to-transparent" />
-              <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-300 to-transparent" />
-              <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-orange-300 to-transparent" />
-              <div className="absolute left-8 top-8 h-28 w-28 rounded-full border border-cyan-300/30" />
-              <div className="absolute right-10 top-12 h-40 w-40 rounded-full border border-orange-300/20" />
-              <div className="absolute bottom-10 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full border border-cyan-300/20" />
-            </div>
+      {reflectionOpen && (
+        <FirstReflectionHologram onClose={() => setReflectionOpen(false)} />
+      )}
+    </section>
+  );
+}
 
-            <div className="relative z-10 grid max-h-[88vh] overflow-y-auto lg:grid-cols-[0.8fr_1.2fr]">
-              <div className="relative border-b border-cyan-300/20 bg-gradient-to-br from-cyan-500/14 via-black/25 to-orange-500/16 p-8 light:border-black/10 light:from-cyan-50 light:via-white light:to-orange-50">
-                <div className="flex items-start justify-between gap-5">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
-                      Explorer HUD
-                    </p>
+function GermanyLifeHologram({
+  selectedCard,
+  onClose,
+}: {
+  selectedCard: (typeof germanyLifeCards)[number];
+  onClose: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-[90] flex items-center justify-center bg-black/75 px-5 py-10 backdrop-blur-md"
+      onClick={onClose}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(34,211,238,0.12),transparent_30%),radial-gradient(circle_at_70%_70%,rgba(249,115,22,0.12),transparent_28%)]" />
 
-                    <p className="mt-5 text-6xl">{selectedCard.icon}</p>
+      <div
+        className="relative max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-slate-950/90 text-white shadow-[0_0_100px_rgba(34,211,238,0.22)] backdrop-blur-xl light:bg-white/95 light:text-black"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-300 to-transparent" />
+          <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-300 to-transparent" />
+          <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-orange-300 to-transparent" />
+          <div className="absolute left-8 top-8 h-28 w-28 rounded-full border border-cyan-300/30" />
+          <div className="absolute right-10 top-12 h-40 w-40 rounded-full border border-orange-300/20" />
+          <div className="absolute bottom-10 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full border border-cyan-300/20" />
+        </div>
 
-                    <h3 className="mt-6 text-4xl font-extrabold leading-tight md:text-5xl">
-                      {selectedCard.title}
-                    </h3>
+        <div className="relative z-10 grid max-h-[88vh] overflow-y-auto lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="relative border-b border-cyan-300/20 bg-gradient-to-br from-cyan-500/14 via-black/25 to-orange-500/16 p-8 light:border-black/10 light:from-cyan-50 light:via-white light:to-orange-50">
+            <div className="flex items-start justify-between gap-5">
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-cyan-200 light:text-cyan-700">
+                  Explorer HUD
+                </p>
 
-                    <p className="mt-4 text-sm uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
-                      {selectedCard.label}
-                    </p>
-                  </div>
+                <p className="mt-5 text-6xl">{selectedCard.icon}</p>
 
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCard(null)}
-                    className="pointer-events-auto rounded-full border border-white/10 bg-white/10 px-4 py-2 text-white transition hover:bg-white/20 light:border-black/10 light:bg-black/5 light:text-black"
-                    aria-label="Close hologram"
-                  >
-                    ✕
-                  </button>
-                </div>
+                <h3 className="mt-6 text-4xl font-extrabold leading-tight md:text-5xl">
+                  {selectedCard.title}
+                </h3>
 
-                <div className="mt-10 grid grid-cols-2 gap-3 text-xs uppercase tracking-[0.18em] text-gray-300 light:text-gray-700">
-                  <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4">
-                    Status
-                    <p className="mt-2 font-bold text-cyan-200 light:text-cyan-700">
-                      Online
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-orange-300/20 bg-orange-300/10 p-4">
-                    Mode
-                    <p className="mt-2 font-bold text-orange-200 light:text-orange-700">
-                      Reflection
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-5 rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-md light:border-black/10 light:bg-white/70">
-                  <p className="text-xs uppercase tracking-[0.25em] text-cyan-200 light:text-cyan-700">
-                    Scripture seed
-                  </p>
-
-                  <p className="mt-3 text-sm leading-7 text-gray-200 light:text-gray-700">
-                    {selectedCard.scripture}
-                  </p>
-                </div>
+                <p className="mt-4 text-sm uppercase tracking-[0.22em] text-orange-200 light:text-orange-700">
+                  {selectedCard.label}
+                </p>
               </div>
 
-              <div className="p-8 md:p-10">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200 light:text-cyan-700">
-                    {selectedCard.command}
-                  </span>
+              <button
+                type="button"
+                onClick={onClose}
+                className="pointer-events-auto rounded-full border border-white/10 bg-white/10 px-4 py-2 text-white transition hover:bg-white/20 light:border-black/10 light:bg-black/5 light:text-black"
+                aria-label="Close hologram"
+              >
+                ✕
+              </button>
+            </div>
 
-                  <span className="rounded-full border border-orange-300/20 bg-orange-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-orange-200 light:text-orange-700">
-                    Germany Life
-                  </span>
-                </div>
+            <div className="mt-10 grid grid-cols-2 gap-3 text-xs uppercase tracking-[0.18em] text-gray-300 light:text-gray-700">
+              <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4">
+                Status
+                <p className="mt-2 font-bold text-cyan-200 light:text-cyan-700">
+                  Online
+                </p>
+              </div>
 
-                <div className="mt-7 space-y-5 text-base leading-8 text-gray-300 light:text-gray-700">
-                  {selectedCard.content.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-
-                <div className="mt-7 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
-                  <strong>Lesson:</strong> {selectedCard.lesson}
-                </div>
-
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <button
-                    type="button"
-                    className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
-                  >
-                    Full room opening soon
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCard(null)}
-                    className="rounded-2xl border border-white/10 px-6 py-4 font-semibold text-white transition hover:bg-white/10 light:border-black/10 light:text-black light:hover:bg-black/5"
-                  >
-                    Close hologram
-                  </button>
-                </div>
-
-                <p className="mt-6 text-sm text-gray-500 light:text-gray-600">
-                  Reflection by{" "}
-                  <span className="font-semibold text-gray-300 light:text-gray-800">
-                    Marvel Marodza
-                  </span>
-                  . Built for public-safe encouragement, not private exposure.
+              <div className="rounded-2xl border border-orange-300/20 bg-orange-300/10 p-4">
+                Mode
+                <p className="mt-2 font-bold text-orange-200 light:text-orange-700">
+                  Reflection
                 </p>
               </div>
             </div>
+
+            <div className="mt-5 rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-md light:border-black/10 light:bg-white/70">
+              <p className="text-xs uppercase tracking-[0.25em] text-cyan-200 light:text-cyan-700">
+                Scripture seed
+              </p>
+
+              <p className="mt-3 text-sm leading-7 text-gray-200 light:text-gray-700">
+                {selectedCard.scripture}
+              </p>
+            </div>
+          </div>
+
+          <div className="p-8 md:p-10">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200 light:text-cyan-700">
+                {selectedCard.command}
+              </span>
+
+              <span className="rounded-full border border-orange-300/20 bg-orange-300/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-orange-200 light:text-orange-700">
+                Germany Life
+              </span>
+            </div>
+
+            <div className="mt-7 space-y-5 text-base leading-8 text-gray-300 light:text-gray-700">
+              {selectedCard.content.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
+            <div className="mt-7 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
+              <strong>Lesson:</strong> {selectedCard.lesson}
+            </div>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <button
+                type="button"
+                className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
+              >
+                Full room opening soon
+              </button>
+
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-2xl border border-white/10 px-6 py-4 font-semibold text-white transition hover:bg-white/10 light:border-black/10 light:text-black light:hover:bg-black/5"
+              >
+                Close hologram
+              </button>
+            </div>
+
+            <p className="mt-6 text-sm text-gray-500 light:text-gray-600">
+              Reflection by{" "}
+              <span className="font-semibold text-gray-300 light:text-gray-800">
+                Marvel Marodza
+              </span>
+              . Built for public-safe encouragement, not private exposure.
+            </p>
           </div>
         </div>
-      )}
-    </section>
+      </div>
+    </div>
+  );
+}
+
+function FirstReflectionHologram({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-[95] flex items-center justify-center bg-black/78 px-5 py-10 backdrop-blur-md"
+      onClick={onClose}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_35%_20%,rgba(59,130,246,0.16),transparent_32%),radial-gradient(circle_at_75%_75%,rgba(249,115,22,0.14),transparent_30%)]" />
+
+      <article
+        className="relative max-h-[88vh] w-full max-w-5xl overflow-y-auto rounded-[2rem] border border-orange-300/25 bg-slate-950/94 p-8 text-white shadow-[0_0_100px_rgba(249,115,22,0.18)] backdrop-blur-xl light:bg-white/96 light:text-black md:p-10"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-orange-300 to-transparent" />
+          <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full border border-cyan-300/20" />
+          <div className="absolute -bottom-20 left-10 h-44 w-44 rounded-full border border-orange-300/20" />
+        </div>
+
+        <div className="relative z-10">
+          <div className="flex items-start justify-between gap-5">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] text-orange-300 light:text-orange-700">
+                Reflection Hologram
+              </p>
+
+              <h3 className="mt-4 text-4xl font-extrabold leading-tight md:text-5xl">
+                {firstReflection.title}
+              </h3>
+
+              <div className="mt-5 flex flex-wrap gap-3 text-xs font-medium uppercase tracking-[0.16em] text-gray-300 light:text-gray-700">
+                <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 light:border-black/10 light:bg-black/[0.03]">
+                  Written by {firstReflection.author}
+                </span>
+
+                <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 light:border-black/10 light:bg-black/[0.03]">
+                  Published: {firstReflection.publishedDisplay}
+                </span>
+
+                <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 light:border-black/10 light:bg-black/[0.03]">
+                  {firstReflection.category}
+                </span>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-white transition hover:bg-white/20 light:border-black/10 light:bg-black/5 light:text-black"
+              aria-label="Close reflection"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="mt-8 rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-5 text-sm leading-7 text-cyan-100 light:border-cyan-200 light:bg-cyan-50 light:text-cyan-900">
+            <p className="text-xs uppercase tracking-[0.25em] text-cyan-200 light:text-cyan-700">
+              Scripture seed
+            </p>
+
+            <p className="mt-3">{firstReflection.scripture}</p>
+          </div>
+
+          <div className="mt-8 rounded-3xl border border-orange-300/20 bg-orange-500/10 p-5 text-sm leading-7 text-orange-100 light:border-orange-200 light:bg-orange-50 light:text-orange-900">
+            <strong>Truth-seeking note:</strong> {firstReflection.truthNote}
+          </div>
+
+          <div className="mt-8 space-y-6 text-base leading-8 text-gray-300 light:text-gray-700 md:text-lg md:leading-9">
+            {firstReflection.preview.map((paragraph) => (
+              <p
+                key={paragraph}
+                className={
+                  paragraph.includes("Jesus said")
+                    ? "rounded-3xl border-l-4 border-orange-400 bg-white/[0.05] p-5 text-orange-100 light:bg-orange-50 light:text-orange-900"
+                    : paragraph.includes("beyond the horizon")
+                      ? "font-semibold text-orange-300 light:text-orange-700"
+                      : ""
+                }
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              className="rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:scale-105 light:bg-black light:text-white"
+            >
+              Full article page opening later
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-2xl border border-white/10 px-6 py-4 font-semibold text-white transition hover:bg-white/10 light:border-black/10 light:text-black light:hover:bg-black/5"
+            >
+              Close reflection
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
   );
 }
